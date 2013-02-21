@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<project name="JDBC x Pentaho Example" default="runstatic"> 
+  <property name="tomcat.home" value="/Users/emadruga/apache-tomcat-6.0.33"/>
+  <property name="includeantruntime" value="false"/>
+  <path id="classpath">
+    <fileset dir="lib">
+      <include name="*.jar" />
+    </fileset>
+    <fileset file="${tomcat.home}/lib/servlet-api.jar"/>
+  </path>
+
+  <path id="runtime_classpath"> 
+    <fileset dir="lib"> 
+      <include name="*.jar" /> 
+      <include name="jdbc/mysql-connector*.jar" /> 
+    </fileset> 
+    <dirset dir="classes"/>
+    <dirset dir="src"/> 
+    <dirset dir="config"/>
+  </path> 
+  
+  <target name="clean"> 
+    <delete dir="classes"/> 
+  </target> 
+  
+  <target name="compile"> 
+    <mkdir dir="classes"/> 
+    <javac classpathref="classpath" destdir="classes" fork="true" srcdir="src"/> 
+  </target> 
+
+  <target name="runstatic" depends="compile"> 
+    <java fork="true" classpathref="runtime_classpath" classname="NamedStaticDataFactoryApp"/> 
+  </target>
+  
+  <target name="runsql" depends="compile"> 
+    <java fork="true" classpathref="runtime_classpath" classname="SQLReportDataFactoryApp"/> 
+  </target>
+</project>
