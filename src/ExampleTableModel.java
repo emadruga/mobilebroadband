@@ -22,7 +22,7 @@ public class ExampleTableModel extends DefaultTableModel {
     private Vector<Vector<Object>> vData = null;
     private Vector<Vector<Object>> valleys = null;
 
-    Object columnNames[] = new Object[] {"Session", "SampleTime", "Speed"};
+    Object columnNames[] = new Object[] {"ValleyID", "SampleTime", "Speed"};
 
     Object data[][] = new Object[][] {
 		{1,"2012-10-26 10:56:38", 400.56F },
@@ -38,20 +38,20 @@ public class ExampleTableModel extends DefaultTableModel {
 		{1,"2012-10-26 10:56:54", 400.56F },
 		{1,"2012-10-26 10:56:55", 400.56F },
 		{1,"2012-10-26 10:56:56", 300.56F },
-		{1,"2012-10-26 10:56:57",1301.56F },
-		{1,"2012-10-26 10:56:58",1101.56F },
-		{1,"2012-10-26 10:56:59",1001.56F },
-		{1,"2012-10-26 10:57:01", 501.56F },
-		{1,"2012-10-26 10:57:02", 801.56F },
-		{1,"2012-10-26 10:57:03", 901.56F },
-		{1,"2012-10-26 10:57:04",1401.56F },
+		{2,"2012-10-26 10:56:57",1301.56F },
+		{2,"2012-10-26 10:56:58",1101.56F },
+		{2,"2012-10-26 10:56:59",1001.56F },
+		{2,"2012-10-26 10:57:01", 501.56F },
+		{2,"2012-10-26 10:57:02", 801.56F },
+		{2,"2012-10-26 10:57:03", 901.56F },
+		{2,"2012-10-26 10:57:04",1401.56F },
 		{1,"2012-10-26 10:57:05", 300.56F },
 		{1,"2012-10-26 10:57:06", 400.56F },
-		{1,"2012-10-26 10:57:07",1303.56F },
-		{1,"2012-10-26 10:57:08", 503.56F },
-		{1,"2012-10-26 10:57:09", 803.56F },
-		{1,"2012-10-26 10:57:10", 903.56F },
-		{1,"2012-10-26 10:57:11",1403.56F },
+		{3,"2012-10-26 10:57:07",1303.56F },
+		{3,"2012-10-26 10:57:08", 503.56F },
+		{3,"2012-10-26 10:57:09", 803.56F },
+		{3,"2012-10-26 10:57:10", 903.56F },
+		{3,"2012-10-26 10:57:11",1403.56F },
 		{1,"2012-10-26 10:57:12", 400.56F },
 		{1,"2012-10-26 10:57:13", 300.56F },
 		{1,"2012-10-26 10:57:14",1300.56F }
@@ -253,10 +253,16 @@ public class ExampleTableModel extends DefaultTableModel {
 
 	int foundEnd = 0;
 	int end = valley+1;
+	Float max = 0.0F;
 
 	while(end < original.size() && ( end - valley) <= 3) {
 	    if (goingUpByDelta(original, valley, end, delta)) {
-		foundEnd = end;
+		Vector<Object> sample  = original.get(end);
+		Float          tput    = (Float) sample.get(2);
+		if (tput > max) {
+		    max = tput;
+		    foundEnd = end;
+		}
 		end++;
 	    } else if (goingUp(original, valley, end)) {
 		end++;
