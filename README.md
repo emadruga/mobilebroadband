@@ -23,7 +23,7 @@ Depends on Pentaho Reporting. To run project, add a sym link by following the pr
 
 	% cd ./mobilebroadband
 
-	% ln -s $HOME/<PRD-INSTALL>/lib
+	% ln -s $HOME/<PRD-INSTALL>/lib ./lib
 
 4) Compile and run:
 
