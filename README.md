@@ -15,16 +15,26 @@ Depends on Pentaho Reporting. To run project, add a sym link by following the pr
 
 2) Install somewhere in your HOME directory
 
-	% mkdir $HOME/
+	% mkdir $HOME/prd; cd $HOME/prd
 
-	% tar xvf prd-ce-<version>-GA.tar.gz
+	% tar xvf $HOME/prd-ce-<version>-GA.tar.gz
 
 3) Create the symbolic link:
 
 	% cd ./mobilebroadband
 
-	% ln -s $HOME/<PRD-INSTALL>/lib ./lib
+	% ln -s $HOME/prd/<PRD-INSTALL>/lib ./lib
 
 4) Compile and run:
 
 	% ant clean; ant
+
+In order to use the github repo behind a corporate firewall:
+
+1) Enable the proxy:
+
+   	  % git config --global http.proxy http://user:passw@company.com:8080
+
+2) When no proxy is needed anymore:
+
+   	  % git config --global --unset http.proxy
