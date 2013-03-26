@@ -18,6 +18,11 @@ public class NamedStaticDataFactoryApp extends JFrame {
 	// constructor which displays the simple 
 	// application shell
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public NamedStaticDataFactoryApp() { 
 		super("NamedStaticDataFactory"); 
 
@@ -66,7 +71,7 @@ public class NamedStaticDataFactoryApp extends JFrame {
 			ResourceManager manager = new ResourceManager();
 			manager.registerDefaults();
 			Resource res = manager.createDirectly(
-				new URL("file:data/Lista_de_Vales.prpt"), MasterReport.class);
+				new URL("file:data/CQI_x_FTP.prpt"), MasterReport.class);
 			MasterReport report = (MasterReport) res.getResource();
 			
 			// load data

@@ -1,9 +1,12 @@
 SELECT
-	Sessions.SessionId,
-	ResultsFTPTest.msgTime, 
+	Sessions.SessionId AS 'sessionid',
+	ResultsFTPTest.msgTime AS 'msgtime', 
+        NetworkInfo.LAC,
+        NetworkInfo.MCC  AS MCC,
+        NetworkInfo.MNC  AS MNC,
 	NetworkInfo.CID,
 	NetworkInfo.Technology,
-        ROUND(ResultsFTPTest.throughput*8/1000) AS throughput,
+        ROUND(ResultsFTPTest.throughput*8/1000) AS 'throughput',
 	NetworkInfo.BCCH AS NI_BCCH,
 	NetworkInfo.SC1 AS NI_SC1,
 	NetworkInfo.SC2 AS NI_SC2, 
@@ -21,7 +24,6 @@ WHERE
 	Sessions.sessionId = TestInfo.sessionId AND
 	ResultsFTPTest.NetworkId = NetworkInfo.NetworkId AND
 	TestInfo.TestId = ResultsFTPTest.TestId AND
-	ResultsFTPTest.lastBlock = 0 AND
-	Sessions.SessionId = 600
+	ResultsFTPTest.lastBlock = 0
 ORDER BY
-	Sessions.SessionId
+	Sessions.SessionId, ResultsFTPTest.msgTime

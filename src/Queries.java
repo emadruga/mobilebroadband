@@ -12,9 +12,9 @@ public class Queries {
 
     public static Properties getQueries() throws SQLException {
     	InputStream is = 
-    		Queries.class.getResourceAsStream("/" + propFileName);
+    		Queries.class.getResourceAsStream("./config/" + propFileName);
     	if (is == null){
-    		throw new SQLException("Unable to load property file: " + propFileName);
+    		throw new SQLException("Unable to open property file: " + propFileName);
     	}
     	//singleton
     	if(props == null){
@@ -39,7 +39,7 @@ public class Queries {
 	String fileName = getQueries().getProperty(query);
 
     	InputStream is = 
-    		Queries.class.getResourceAsStream("/" + fileName);
+    		Queries.class.getResourceAsStream("./config/" + fileName);
     	if (is == null){
     		throw new SQLException("Unable to load SQL file: " + fileName);
     	}
