@@ -25,7 +25,11 @@ Depends on Pentaho Reporting. To run project, add a sym link by following the pr
 
 	% ln -s $HOME/prd/<PRD-INSTALL>/lib ./lib
 
-4) Compile and run:
+4) Configure Environment Settings on "build.xml"
+	
+	% vi build.xml
+
+5) Compile and run:
 
 	% ant clean; ant
 

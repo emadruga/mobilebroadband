@@ -4,8 +4,16 @@
 	<property name="src.dir" value="src"/>
 	<property name="build.dir" value="bin"/>
 	<property name="main-class" value="Main"/>
+	
+	
+	<!-- *** environment settings *** -->
+	
+	<!-- *** mysql connector (.jar) dir *** -->
 	<property name="mysqlLib.dir" value="/Users/rdantas/Dropbox/Eclipse"/>
+	
+	<!-- *** Pentaho Reporting Design libs *** -->
 	<property name="pentahoLib.dir" value="/Users/rdantas/Dropbox/Eclipse/pentaho-libs"/>
+
 	
 	<path id="classpath">
 		<fileset dir="${mysqlLib.dir}" includes="**/*.jar"/>
@@ -18,6 +26,7 @@
 		<dirset dir="${build.dir}" />
 	</path>
 
+	<!-- *** targets *** -->	
 	<target name="clean">
 		<delete dir="${build.dir}"/>
 	</target>
@@ -33,4 +42,5 @@
 
 	<target name="main" depends="run"/>
 
+	<!-- *** end of targets *** -->
 </project>
