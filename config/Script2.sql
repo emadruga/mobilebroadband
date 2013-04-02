@@ -1,0 +1,1 @@
+SELECT * from cqi_ecio_rscp_ftp

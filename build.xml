@@ -1,38 +1,36 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<project name="JDBC x Pentaho Example" default="runstatic"> 
-  <property name="tomcat.home" value="/Users/emadruga/apache-tomcat-6.0.33"/>
-  <property name="includeantruntime" value="false"/>
-  <path id="classpath">
-    <fileset dir="lib">
-      <include name="*.jar" />
-    </fileset>
-    <fileset file="${tomcat.home}/lib/servlet-api.jar"/>
-  </path>
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="JDBC x Pentaho Example" basedir="." default="main">
 
-  <path id="runtime_classpath"> 
-    <fileset dir="lib"> 
-      <include name="*.jar" /> 
-      <include name="jdbc/mysql-connector*.jar" /> 
-    </fileset> 
-    <dirset dir="classes"/>
-    <dirset dir="src"/> 
-    <dirset dir="config"/>
-  </path> 
-  
-  <target name="clean"> 
-    <delete dir="classes"/> 
-  </target> 
-  
-  <target name="compile"> 
-    <mkdir dir="classes"/> 
-    <javac classpathref="classpath" destdir="classes" fork="true" srcdir="src"/> 
-  </target> 
+	<property name="src.dir" value="src"/>
+	<property name="build.dir" value="bin"/>
+	<property name="main-class" value="Main"/>
+	<property name="mysqlLib.dir" value="/Users/rdantas/Dropbox/Eclipse"/>
+	<property name="pentahoLib.dir" value="/Users/rdantas/Dropbox/Eclipse/pentaho-libs"/>
+	
+	<path id="classpath">
+		<fileset dir="${mysqlLib.dir}" includes="**/*.jar"/>
+		<fileset dir="${pentahoLib.dir}" includes="**/*.jar"/>
+	</path>
 
-  <target name="runstatic" depends="compile"> 
-    <java fork="true" classpathref="runtime_classpath" classname="NamedStaticDataFactoryApp"/> 
-  </target>
-  
-  <target name="runsql" depends="compile"> 
-    <java fork="true" classpathref="runtime_classpath" classname="SQLReportDataFactoryApp"/> 
-  </target>
+	<path id="runtime_classpath">
+		<fileset dir="${mysqlLib.dir}" includes="**/*.jar"/>
+		<fileset dir="${pentahoLib.dir}" includes="**/*.jar"/>
+		<dirset dir="${build.dir}" />
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="compile">
+		<mkdir dir="${build.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="classpath"/>
+	</target>
+
+	<target name="run" depends="compile">
+		<java fork="true" classpathref="runtime_classpath" classname="${main-class}"/>
+	</target>
+
+	<target name="main" depends="run"/>
+
 </project>
