@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 
 
-public class ValleyTableModel extends DefaultTableModel {
+public class ValleyTableModel extends DefaultTableModel implements IFaceTableModel{
 	
 	public ValleyTableModel(Vector<Valley> valleys) throws IOException{
 		super();
