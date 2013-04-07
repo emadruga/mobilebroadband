@@ -9,7 +9,6 @@ import aux.QueryReader;
 import dataModel.Sample;
 
 public class SampleGenerator {
-
 		
 	private static Sample generateSample(ResultSet resultSet) throws SQLException {
 				
@@ -47,7 +46,7 @@ public class SampleGenerator {
 
 		// Variables Declaration
 		Vector<Sample> vectorOfSamples = new Vector<Sample>();
-		MysqlConnection connection = new MysqlConnection("cqi_ecio_rscp_ftp");
+		MysqlConnection connection = new MysqlConnection("config/dbProperties.xml");
 
 		String query = queryPrepare(startTime, endTime);
 		System.out.println("Sample Generator -- Query: "+query);

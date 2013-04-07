@@ -5,19 +5,7 @@ import java.util.Vector;
 import aux.Report;
 import dataModel.*;
 
-
 public class Core {
-
-	/**
-	 * @param args
-	 * @throws IOException
-	 */
-	
-
-	public static void checkPossibilitiesOnDatabase(){
-		
-	}
-
 
 	public static void putValleysOnPentaho_needsAbetterName(String startTime, String endTime, int lenght, float Delta1, float Delta2) throws IOException {
 
@@ -34,7 +22,7 @@ public class Core {
 		Report report = new Report();
 		
 		//showing 
-		report.showChart(tableModel, "data/Lista_de_Vales2.prpt");
+		report.showChart(tableModel, "reports/Lista_de_Vales2.prpt");
 				
 	}
 
@@ -53,14 +41,9 @@ public class Core {
 		Report report = new Report();
 		
 		//showing 
-		report.showChart(tableModel, "data/Summary.prpt");
+		report.showChart(tableModel, "reports/Summary.prpt");
 				
 	}
-
-	
-	
-	
-	
 	
 	/*
 	 * Other methods to generate different reports

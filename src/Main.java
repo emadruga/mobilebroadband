@@ -1,9 +1,6 @@
 
 import java.io.IOException;
 
-
-
-
 public class Main {
 	
 	/**
@@ -21,7 +18,7 @@ public class Main {
 		
 		//Starts Here
 		Core.putValleysOnPentaho_needsAbetterName(startTime, endTime, lenght, Delta1, Delta2);
-		Core.summary(startTime, endTime, lenght, Delta1, Delta2);
+		//Core.summary(startTime, endTime, lenght, Delta1, Delta2);
 	}
 	
 }

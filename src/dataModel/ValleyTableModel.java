@@ -82,17 +82,7 @@ public class ValleyTableModel extends DefaultTableModel implements IFaceTableMod
 			}
 			
 			
-		}
-		
-		for (int i = 0; i < finalVector.size(); i++) {
-			
-			for (int j = 0; j < vector.size() ; j++) {
-				System.out.print(finalVector.get(i).get(j)+ "   ");
-			} System.out.println("----------");
-		}
-		
-		
-		
+		}	
 		return finalVector;
 	}
 	

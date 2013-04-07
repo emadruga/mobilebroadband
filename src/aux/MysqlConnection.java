@@ -10,9 +10,9 @@ import java.sql.SQLException;
 public class MysqlConnection {
     
     private Connection conexao = null;
-	private String servidor = "localhost";
+	private String servidor = "";
 	private String banco = "";
-	private String usuario = "root";
+	private String usuario = "";
 	private String senha = "";
 	// private String porta="3316";
 	private boolean estaConectado = false;
@@ -24,7 +24,7 @@ public class MysqlConnection {
 	public boolean getStatus() {
 		return this.estaConectado;
 	}
-
+	
 	public void conectar() {
 
 		try {
@@ -66,17 +66,14 @@ public class MysqlConnection {
 		}
 	}
 
-	public MysqlConnection(String servidor, String banco, String usuario,
-			String senha){
-		this.servidor = servidor;
-		this.banco = banco;
-		this.usuario = usuario;
-		this.senha = senha;
+	public MysqlConnection(String pathToXml){
+		Props properties = new Props(pathToXml);
+		this.servidor = properties.getServer();
+		this.banco = properties.getDatabase();
+		this.usuario = properties.getUser();
+		this.senha = properties.getPassword();
 	}
 
-	public MysqlConnection(String banco){
-		this.banco = banco;
-	}
     
     
     

@@ -8,16 +8,12 @@ import dataModel.Valley;
 public class ValleyGenerator {
 
 	private final static Integer MAX_TIME_SECS = 20;
-	
-	
-	
-	
+
 	private static boolean goingUp(Vector<Sample> sampleList, int v, int e) {
-		System.out.print("GoingUp: ");
+		////System.out.print("GoingUp: ");
 		return goingUpByDelta(sampleList,v,e,0.0F);
 		}
-	
-	
+		
 	private static boolean goingUpByDelta(Vector<Sample> sampleList, int v, int e, float delta) {
 
 		boolean response = false;
@@ -33,7 +29,7 @@ public class ValleyGenerator {
 		    if ((tputE > tputV) && (diff >  delta)) {
 			response = true;
 		    }
-		    System.out.println("GoingUpByDelta: v = " + tputV  + " e = " + tputE + " (" + response + ", " + diff + ", " + delta + ")");
+		    ////System.out.println("GoingUpByDelta: v = " + tputV  + " e = " + tputE + " (" + response + ", " + diff + ", " + delta + ")");
 		}
 
 		return response;
@@ -98,7 +94,7 @@ public class ValleyGenerator {
 				if (vectorOfValley == null) {
 				    vectorOfValley = new Vector<Valley>();
 				}
-				System.out.println("Diff (secs): "+ diff(timeE, timeS) + " ts: " + timeS + " te: " + timeE );
+				//System.out.println("Diff (secs): "+ diff(timeE, timeS) + " ts: " + timeS + " te: " + timeE );
 				appendValley(sampleList, vectorOfValley, count, start, valley, end);
 			    }
 			} 
@@ -115,11 +111,6 @@ public class ValleyGenerator {
 
 		
 	}
-
-	
-	
-
-
 	
 	private static int interestingWayDown(Vector<Sample> sampleList, int start, float delta) {
 		int foundValley = 0;
@@ -156,14 +147,14 @@ public class ValleyGenerator {
     	    if (tputS > tputV && diff >  delta ) {
     		response = true;
     	    }
-    	    System.out.println("GoingDownByDelta: s = " + tputS  + " v = " + tputV + " (" + response + ", " + diff +")");
+    	    //System.out.println("GoingDownByDelta: s = " + tputS  + " v = " + tputV + " (" + response + ", " + diff +")");
     	}
 
     	return response;
         }
     
     private static boolean goingDown(Vector<Sample> sampleList, int s, int v) {
-    	System.out.print("GoingDown: ");
+    	//System.out.print("GoingDown: ");
     	return  goingDownByDelta(sampleList,s,v,0.0F);
         }
     
@@ -182,10 +173,8 @@ public class ValleyGenerator {
     		oneValley.addSample(original.get(i));    	
     		oneValley.setValleySample(original.get(v));
     		oneValley.setValleyId(id);
-    		System.out.println("Append: s = " + original.get(i).getMsgId());
+    		//System.out.println("Append: s = " + original.get(i).getMsgId());
     	}
     	resp.addElement(oneValley);
     }
-    
-	
 }

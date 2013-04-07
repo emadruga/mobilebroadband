@@ -44,7 +44,8 @@ public class SummaryTableModel extends DefaultTableModel implements IFaceTableMo
 	public Vector<Vector<Object>> organizeData(Vector<Valley> valleys) {
 		
 		for (Valley valley : valleys) {
-			if (valley.testForCqiProblem() && valley.testForEcioProblem() && valley.testForRscpProblem()) all++;
+			if (valley.testForCqiProblem() && valley.testForEcioProblem() && valley.testForRscpProblem())
+				all++;
 			if (valley.testForCqiProblem() && !valley.testForEcioProblem() && !valley.testForRscpProblem()) cqi++;
 			if (!valley.testForCqiProblem() && valley.testForEcioProblem() && !valley.testForRscpProblem()) ecio++;
 			if (!valley.testForCqiProblem() && !valley.testForEcioProblem() && valley.testForRscpProblem()) rscp++;
@@ -53,14 +54,6 @@ public class SummaryTableModel extends DefaultTableModel implements IFaceTableMo
 			if (!valley.testForCqiProblem() && valley.testForEcioProblem() && valley.testForRscpProblem()) ecioArscp++;
 			if (!valley.testForCqiProblem() && !valley.testForEcioProblem() && !valley.testForRscpProblem()) nothing++;
 		}
-		
-		System.out.println("All: "+all);
-		System.out.println("Cqi: "+cqi);
-		System.out.println("ecio: "+ecio);
-		System.out.println("Rscp: "+rscp);
-		System.out.println("Cqi and Eci0: "+cqiAecio);
-		System.out.println("Cqi and Rscp: "+cqiArscp);
-		System.out.println("Eci0 and Rscp: "+ecioArscp);
 		
 		Vector<Vector<Object>> finalVector = new Vector<Vector<Object>>();
 		Vector<Object> vector = new Vector<Object>();
