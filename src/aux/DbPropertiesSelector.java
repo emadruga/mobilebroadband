@@ -7,11 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class Props {
+public class DbPropertiesSelector {
 	
 	private Properties properties = new Properties();
 	
-	public Props(String fileName){
+	public DbPropertiesSelector(String fileName){
 		
 		this.properties.setProperty("mysqlUser", "DB USER");
 		this.properties.setProperty("mysqlPassword", "DB PASSWORD");
@@ -19,7 +19,7 @@ public class Props {
 		this.properties.setProperty("mysqlServer", "ADDRESS SERVER");
 		
 		if (new File(fileName).exists()) {
-			System.out.println("Exists");
+			System.out.println("dbProperties.xml found in config folder");
 			readFromXML(fileName);
 		} else {
 			System.out

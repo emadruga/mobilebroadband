@@ -3,10 +3,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author User
- */
 public class MysqlConnection {
     
     private Connection conexao = null;
@@ -67,7 +63,7 @@ public class MysqlConnection {
 	}
 
 	public MysqlConnection(String pathToXml){
-		Props properties = new Props(pathToXml);
+		DbPropertiesSelector properties = new DbPropertiesSelector(pathToXml);
 		this.servidor = properties.getServer();
 		this.banco = properties.getDatabase();
 		this.usuario = properties.getUser();

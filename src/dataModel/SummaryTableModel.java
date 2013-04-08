@@ -1,8 +1,6 @@
 package dataModel;
 
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;

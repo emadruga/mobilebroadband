@@ -1,13 +1,17 @@
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Vector;
 
 import aux.Report;
-import dataModel.*;
+import dataModel.Sample;
+import dataModel.SummaryTableModel;
+import dataModel.Valley;
+import dataModel.ValleyTableModel;
 
 public class Core {
 
-	public static void putValleysOnPentaho_needsAbetterName(String startTime, String endTime, int lenght, float Delta1, float Delta2) throws IOException {
+	public static void putValleysOnPentaho_needsAbetterName(String startTime, String endTime, int lenght, float Delta1, float Delta2) throws IOException, SQLException {
 
 		//acquiring samples
 		Vector<Sample> vectorOfSample = SampleGenerator.buscarAmostras(startTime, endTime, "", "");
@@ -26,7 +30,7 @@ public class Core {
 				
 	}
 
-	public static void summary(String startTime, String endTime, int lenght, float Delta1, float Delta2) throws IOException {
+	public static void summary(String startTime, String endTime, int lenght, float Delta1, float Delta2) throws IOException, SQLException {
 
 		//acquiring samples
 		Vector<Sample> vectorOfSample = SampleGenerator.buscarAmostras(startTime, endTime, "", "");

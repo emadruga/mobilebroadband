@@ -29,7 +29,14 @@ Depends on Pentaho Reporting. To run project, add a sym link by following the pr
 	
 	% vi build.xml
 
-5) Compile and run:
+5) Edit the dbProperties file:
+
+	% cd config
+	% vi dbProperties.xml
+	
+	If you don't have a dbProperties.xml, in your first attempt to run, you'll be warned about it and a default dbProperties.xml will be created.
+
+6) Compile and run:
 
 	% ant clean; ant
 
