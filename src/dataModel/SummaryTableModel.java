@@ -7,7 +7,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class SummaryTableModel extends DefaultTableModel implements IFaceTableModel{
 	
-	public SummaryTableModel(Vector<Valley> valleys) throws IOException{
+	public SummaryTableModel(Vector<Valley> valleys){
 		super();
 		setDataVector(organizeData(valleys), organizeColumnNames());
 	}	

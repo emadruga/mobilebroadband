@@ -1,6 +1,5 @@
 package dataModel;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
@@ -11,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class ValleyTableModel extends DefaultTableModel implements IFaceTableModel{
 	
-	public ValleyTableModel(Vector<Valley> valleys) throws IOException{
+	public ValleyTableModel(Vector<Valley> valleys) {
 		super();
 		setDataVector(organizeData(valleys), organizeColumnNames());
 	}

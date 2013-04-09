@@ -11,7 +11,7 @@ import dataModel.ValleyTableModel;
 
 public class Core {
 
-	public static void putValleysOnPentaho_needsAbetterName(String startTime, String endTime, int lenght, float Delta1, float Delta2) throws IOException, SQLException {
+	public static void putValleysOnPentaho_needsAbetterName(String startTime, String endTime, int lenght, float Delta1, float Delta2) {
 
 		//acquiring samples
 		Vector<Sample> vectorOfSample = SampleGenerator.buscarAmostras(startTime, endTime, "", "");
@@ -30,7 +30,7 @@ public class Core {
 				
 	}
 
-	public static void summary(String startTime, String endTime, int lenght, float Delta1, float Delta2) throws IOException, SQLException {
+	public static void summary(String startTime, String endTime, int lenght, float Delta1, float Delta2){
 
 		//acquiring samples
 		Vector<Sample> vectorOfSample = SampleGenerator.buscarAmostras(startTime, endTime, "", "");
