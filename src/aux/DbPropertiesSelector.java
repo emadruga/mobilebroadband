@@ -23,7 +23,7 @@ public class DbPropertiesSelector {
 			readFromXML(fileName);
 		} else {
 			System.out
-					.println("The File dbProperties.xml wasn't found. "
+					.println("The File "+fileName+" wasn't found. "
 							+ "We created a default dbProperties.xml in config folder. "
 							+ "Edit it correctly and try again.");
 			storeToXML(fileName);
@@ -47,8 +47,8 @@ public class DbPropertiesSelector {
 			propertiesFromXml.loadFromXML(input);
 		} catch (FileNotFoundException fnf) {
 			System.out
-					.println("The File dbProperties.xml wasn't found. "
-							+ "We created a default dbProperties.xml in config folder. "
+					.println("The File "+fileName+" wasn't found. "
+							+ "We created a default "+fileName+" in config folder. "
 							+ "Edit it correctly and try again.");
 		} catch (IOException e) {
 			System.out.println("IOException");
@@ -56,7 +56,7 @@ public class DbPropertiesSelector {
 		}
 		
 		if (this.properties.equals(propertiesFromXml)) {
-			System.out.println("The dbProperties.xml must be edited. ");
+			System.out.println("The "+fileName+" must be edited. ");
 			System.exit(0);
 		} else {
 			this.properties = propertiesFromXml;

@@ -70,7 +70,7 @@ public class MysqlConnection {
 		this.senha = properties.getPassword();
 	}
 
-    
+
     
     
     

@@ -1,10 +1,12 @@
-package dataModel;
+package tableModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
+
+import dataModel.Valley;
 
 
 

@@ -14,7 +14,7 @@ import org.pentaho.reporting.libraries.resourceloader.Resource;
 import org.pentaho.reporting.libraries.resourceloader.ResourceException;
 import org.pentaho.reporting.libraries.resourceloader.ResourceManager;
 
-import dataModel.IFaceTableModel;
+import tableModel.IFaceTableModel;
 
 public class Report {
 	

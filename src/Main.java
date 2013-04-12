@@ -93,7 +93,7 @@ public class Main {
 		JButton btnNewButton = new JButton("RSCP, EC/I0, CQI X FTP");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Core.putValleysOnPentaho_needsAbetterName(startTime, endTime, lenght, Delta1, Delta2);
+				Core.launchChartFTP(startTime, endTime, lenght, Delta1, Delta2);
 			}
 		});
 		pnlReports.add(btnNewButton);
@@ -106,8 +106,12 @@ public class Main {
 		});
 		pnlReports.add(btnReport);
 		
-		JButton btnReport_1 = new JButton("Report 3");
-		btnReport_1.setEnabled(false);
+		JButton btnReport_1 = new JButton("PDF x CDF 4 Pps");
+		btnReport_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Core.cdfXPdf(startTime, endTime, lenght, Delta1, Delta2);
+			}
+		});
 		pnlReports.add(btnReport_1);
 		
 		JPanel pnlCommand = new JPanel();
@@ -377,7 +381,6 @@ public class Main {
 		pnlOperators.add(verticalStrut_3);
 		
 		JButton btnNewButton_2 = new JButton("Oi");
-		btnNewButton_2.setEnabled(false);
 		btnNewButton_2.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_2);
 		
@@ -385,7 +388,6 @@ public class Main {
 		pnlOperators.add(verticalStrut);
 		
 		JButton btnNewButton_5 = new JButton("Vivo");
-		btnNewButton_5.setEnabled(false);
 		btnNewButton_5.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_5);
 		
@@ -393,7 +395,6 @@ public class Main {
 		pnlOperators.add(verticalStrut_1);
 		
 		JButton btnNewButton_4 = new JButton("Claro");
-		btnNewButton_4.setEnabled(false);
 		btnNewButton_4.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_4);
 		
@@ -401,7 +402,6 @@ public class Main {
 		pnlOperators.add(verticalStrut_2);
 		
 		JButton btnNewButton_3 = new JButton("Tim");
-		btnNewButton_3.setEnabled(false);
 		btnNewButton_3.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_3);
 		

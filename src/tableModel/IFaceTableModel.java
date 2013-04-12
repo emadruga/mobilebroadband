@@ -1,6 +1,8 @@
-package dataModel;
+package tableModel;
 
 import java.util.Vector;
+
+import dataModel.Valley;
 
 
 public interface IFaceTableModel {

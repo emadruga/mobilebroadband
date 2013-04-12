@@ -1,9 +1,10 @@
-package dataModel;
+package tableModel;
 
-import java.io.IOException;
 import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
+
+import dataModel.Valley;
 
 public class SummaryTableModel extends DefaultTableModel implements IFaceTableModel{
 	
