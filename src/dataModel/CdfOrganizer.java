@@ -1,39 +1,86 @@
 package dataModel;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Vector;
 
-
-
-
 public class CdfOrganizer {
-	
-	public String rFparameter=null;
-	public String operatorName=null;
-	public Vector<Integer> intervals = new Vector<Integer>(); 
+
+	public String rFparameter = null;
+	public String operatorName = null;
+	public Vector<Integer> intervals = new Vector<Integer>();
 	public Vector<Integer> frequencies = new Vector<Integer>();
-	public Vector<Double> relativeFrequencies= new Vector<Double>();
+	public Vector<Double> relativeFrequencies = new Vector<Double>();
 	public Vector<Double> cumulativeRelativeFrequencies = new Vector<Double>();
+
+	private int lowerLimit = 0, upperLimit = 0, classInterval = 0; // Put on
+																	// admin.properties
+	int numberOfClasses; // Don't put on admin.properties
 	
-	final int lowerLimit=1, upperLimit=30, classInterval=1;  //Put on admin.properties
-	int numberOfClasses=Math.round(upperLimit/classInterval); //Don't put on admin.properties
+	private static final String settingsPropertiesFolder = "config";
+	private static final String settingsPropertyFileName = "settings.properties";
+	
+	private FileInputStream loadPropertyFile() {
+		FileInputStream input = null;
+		try {
+			input = new FileInputStream(settingsPropertiesFolder + "/"
+					+ settingsPropertyFileName);
+		} catch (FileNotFoundException e) {
+			System.out.println("File '"+settingsPropertyFileName+"' nao encontrado");
+			System.exit(0);
+		}
+		return input;
+	}
+	
+	private void loadParameters() {
+		Properties props = new Properties();
+		try {
+			props.load(loadPropertyFile());
+			this.lowerLimit=Integer.parseInt(props.getProperty(this.rFparameter+"lowerLimit"));
+			this.upperLimit=Integer.parseInt(props.getProperty(this.rFparameter+"upperLimit"));
+			this.classInterval=Integer.parseInt(props.getProperty(this.rFparameter+"classInterval"));
+			//numberOfClasses = Math.abs((Math.abs(upperLimit-lowerLimit)) / classInterval);
+			if (Math.abs(this.upperLimit) > Math.abs(this.lowerLimit))
+			this.numberOfClasses=(Math.abs(this.upperLimit) - Math.abs(this.lowerLimit))/this.classInterval;
+			else
+				this.numberOfClasses=(Math.abs(this.lowerLimit) - Math.abs(this.upperLimit))/this.classInterval;
+				
+				
+			
+		} catch (NumberFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(lowerLimit);
+		System.out.println(upperLimit);
+		System.out.println(classInterval
+				);
+	}
 	
 	
 	
 	/*
 	 * constructor
 	 */
-	public CdfOrganizer(Vector<Sample> vectorOfSamples, String parameter, String operatorName) {
-		//set some variables
-		this.rFparameter=parameter;
-		this.operatorName=operatorName;
-
-		generateData(retrieveParameteres(vectorOfSamples, parameter, operatorName));
-	}
-	
-	
-	//Creates a simple vector of values to be used
-	private Vector<Double> retrieveParameteres(Vector<Sample> vectorOfSamples, String parameter, String operator){
-		Vector<Double>vectorOfParameters = new Vector<Double>();
+	public CdfOrganizer(Vector<Sample> vectorOfSamples, String parameter,
+			String operatorName) {
+		// set some variables
+		this.rFparameter = parameter;
+		this.operatorName = operatorName;
+		loadParameters();
 		
+		generateData(retrieveParameteres(vectorOfSamples, this.rFparameter,
+				this.operatorName));
+		printOut();
+	}
+
+	// Creates a simple vector of values to be used
+	private Vector<Double> retrieveParameteres(Vector<Sample> vectorOfSamples,
+			String parameter, String operator) {
+		Vector<Double> vectorOfParameters = new Vector<Double>();
+
 		switch (parameter) {
 
 		case "rscp":
@@ -65,12 +112,10 @@ public class CdfOrganizer {
 		return vectorOfParameters;
 
 	}
-	
-	
+
 	private void generateData(Vector<Double> vectorOfParameter) {
-
-		System.out.println("Classes: " + numberOfClasses);
-
+		
+		
 		/*
 		 * prepara um vetor com os valores de referencia dos intervalos
 		 */
@@ -110,9 +155,7 @@ public class CdfOrganizer {
 			somaDasFrequenciasRelativas = somaDasFrequenciasRelativas
 					+ relativeFrequencies.get(i);
 		}
-		System.out.println("soma das frequencias relativas = "
-				+ somaDasFrequenciasRelativas);
-
+	
 		/*
 		 * Calculates the acu
 		 */
@@ -123,11 +166,14 @@ public class CdfOrganizer {
 			acuFrequencias = acuFrequencias + relativeFrequencies.get(i);
 			cumulativeRelativeFrequencies.add(acuFrequencias);
 		}
+	}
 
-		/*
-		 * Just for debug
-		 */
-
+	/*
+	 * Just for debug
+	 */
+	private void printOut() {
+		System.out.println("Classes: " + numberOfClasses);
+		
 		System.out.println("Tamanho: " + cumulativeRelativeFrequencies.size());
 
 		for (int i = 0; i < intervals.size(); i++) {
@@ -137,7 +183,6 @@ public class CdfOrganizer {
 			System.out.print(relativeFrequencies.get(i) + "  ");
 			System.out.println(cumulativeRelativeFrequencies.get(i));
 		}
-
 	}
 
 }

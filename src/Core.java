@@ -61,6 +61,7 @@ public class Core {
 		Vector<Valley> vectorOfValley = ValleyGenerator.findValleysOnSamples(vectorOfSamples, lenght, Delta1, Delta2);
 
 		//populating a table model
+		
 		SummaryTableModel tableModel= new SummaryTableModel(vectorOfValley);
 		
 		//creating a new Report Object
@@ -71,16 +72,17 @@ public class Core {
 				
 	}
 	
-	public static void cdfXPdf(String startTime, String endTime, int lenght, float Delta1, float Delta2) {
+	public static void cdfXPdf(String startTime, String endTime, int lenght, float Delta1, float Delta2, String parameter) {
 		//acquiring samples
 		Vector<Sample> vectorOfSamples = SampleGenerator.findSamples(startTime, endTime, "", "");
 		
 		/*
 		 * creates cdfPdfs objectData to each operators (There are 3 operators yet)
 		 */
-		CdfOrganizer VivoCqicdfPdf = new CdfOrganizer(vectorOfSamples, "cqi", "OperatorMNC2");
-		CdfOrganizer TimCqicdfPdf = new CdfOrganizer(vectorOfSamples, "cqi", "OperatorMNC5");
-		CdfOrganizer ClaroCqicdfPdf = new CdfOrganizer(vectorOfSamples, "cqi", "OperatorMNC11");
+		System.out.println(parameter);
+		CdfOrganizer VivoCqicdfPdf = new CdfOrganizer(vectorOfSamples, parameter, "Vivo");
+		CdfOrganizer TimCqicdfPdf = new CdfOrganizer(vectorOfSamples, parameter, "Claro");
+		CdfOrganizer ClaroCqicdfPdf = new CdfOrganizer(vectorOfSamples, parameter, "TIM");
 		
 		/*
 		 * Table model needs to be created with 1 cdfPdf object at least

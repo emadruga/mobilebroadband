@@ -16,12 +16,12 @@ public class CdfTableModel extends DefaultTableModel implements IFaceTableModel 
 		super();
 		prepare(cdfData);
 		add(cdfData);
-
+		printOut();
 	}
 
-	private String[] collumnNames_Base = { "operatorName", "intervals",
+	private String[] collumnNames_Base = {"operatorName", "intervals",
 			"frequencies", "relativeFrequencies",
-			"cumulativeRelativeFrequencies" };
+			"cumulativeRelativeFrequencies", "parameter" };
 
 	private void prepare(CdfOrganizer cdfData) {
 		Vector<Object> vector;
@@ -33,6 +33,7 @@ public class CdfTableModel extends DefaultTableModel implements IFaceTableModel 
 	}
 
 	public void add(CdfOrganizer cdfData) {
+		
 		for (int i = 0; i < cdfData.intervals.size(); i++) {
 			data.get(i).add(cdfData.operatorName);
 		}
@@ -48,6 +49,9 @@ public class CdfTableModel extends DefaultTableModel implements IFaceTableModel 
 		for (int i = 0; i < cdfData.intervals.size(); i++) {
 			data.get(i).add(cdfData.cumulativeRelativeFrequencies.get(i));
 		}
+		for (int i = 0; i < cdfData.intervals.size(); i++) {
+			data.get(i).add(cdfData.rFparameter);
+		}
 		organizeCollumnNames(cdfData.operatorName);
 		setDataVector(data, collumnames);
 
@@ -59,6 +63,20 @@ public class CdfTableModel extends DefaultTableModel implements IFaceTableModel 
 		}
 	}
 
+	
+	private void printOut() {
+		for (int i = 0; i < collumnames.size(); i++) {
+			System.out.print(collumnames.get(i)+"  |  ");
+		}
+		System.out.println();
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = 0; j < data.get(i).size(); j++) {
+				System.out.print(data.get(i).get(j));
+			}
+			System.out.println();
+		}
+	}
+	
 	@Override
 	public Vector<Object> organizeColumnNames() {
 		// TODO Auto-generated method stub

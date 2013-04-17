@@ -36,18 +36,28 @@ public class Sample {
 	 * Methods:
 	 */
 	public String getOperatorName() {
+		String timName="TIM",
+				claroName="Claro",
+				vivoName="Vivo",
+				oiName="Oi";		
+		
 		String name = null;
 		switch (this.mnc) {
 		case 2:
-			name = "OperatorMNC2";
+			name = timName;
 			break;
 		case 5:
-			name = "OperatorMNC5";
+			name = claroName;
 			break;
 		case 11:
-			name = "OperatorMNC11";
+			name = vivoName;
+			break;
+		case 999:
+			name = oiName;
 			break;
 		default:
+			System.out.println("There's no MNC that matches. Verify Sample.getOperatorName");
+			System.exit(0);
 			break;
 		}
 		return name;

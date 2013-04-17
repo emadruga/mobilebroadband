@@ -16,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
 
 public class Main {
@@ -28,6 +30,7 @@ public class Main {
 	int lenght =9;
 	String startTime="2012-01-01", endTime="2013-12-31";
 	float Delta1=0.4f, Delta2=0.4f;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 	
 	
 	public static void populateTable(){
@@ -109,7 +112,9 @@ public class Main {
 		JButton btnReport_1 = new JButton("PDF x CDF 4 Pps");
 		btnReport_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Core.cdfXPdf(startTime, endTime, lenght, Delta1, Delta2);
+				//System.out.println("Mai parameter: "+ buttonGroup.getSelection().getActionCommand());
+				Core.cdfXPdf(startTime, endTime, lenght, Delta1, Delta2, buttonGroup.getSelection().getActionCommand());
+				
 			}
 		});
 		pnlReports.add(btnReport_1);
@@ -407,5 +412,27 @@ public class Main {
 		
 		Component horizontalStrut = Box.createHorizontalStrut(125);
 		pnlOperators.add(horizontalStrut);
+		
+		JRadioButton rdbtnRadio = new JRadioButton("RSCP");
+		rdbtnRadio.setSelected(true);
+		rdbtnRadio.setActionCommand("rscp");
+		rdbtnRadio.setAlignmentX(Component.CENTER_ALIGNMENT);
+		buttonGroup.add(rdbtnRadio);
+		pnlOperators.add(rdbtnRadio);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("CQI");
+		rdbtnNewRadioButton_1.setActionCommand("cqi");
+		buttonGroup.add(rdbtnNewRadioButton_1);
+		rdbtnNewRadioButton_1.setAlignmentX(Component.CENTER_ALIGNMENT);
+		pnlOperators.add(rdbtnNewRadioButton_1);
+		
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Ec/I0");
+		rdbtnNewRadioButton_2.setActionCommand("ecio");
+		buttonGroup.add(rdbtnNewRadioButton_2);
+		rdbtnNewRadioButton_2.setAlignmentX(Component.CENTER_ALIGNMENT);
+		pnlOperators.add(rdbtnNewRadioButton_2);
+		
+		Component verticalStrut_5 = Box.createVerticalStrut(10);
+		pnlOperators.add(verticalStrut_5);
 	}
 }
