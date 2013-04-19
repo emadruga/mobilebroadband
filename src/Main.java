@@ -18,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
+import javax.swing.JToggleButton;
 
 
 public class Main {
@@ -93,7 +94,7 @@ public class Main {
 		fl_pnlReports.setAlignment(FlowLayout.LEFT);
 		pnlSouth.add(pnlReports);
 		
-		JButton btnNewButton = new JButton("RSCP, EC/I0, CQI X FTP");
+		JButton btnNewButton = new JButton("Valleys");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Core.launchChartFTP(startTime, endTime, lenght, Delta1, Delta2);
@@ -109,7 +110,7 @@ public class Main {
 		});
 		pnlReports.add(btnReport);
 		
-		JButton btnReport_1 = new JButton("PDF x CDF 4 Pps");
+		JButton btnReport_1 = new JButton("PDF x CDF");
 		btnReport_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println("Mai parameter: "+ buttonGroup.getSelection().getActionCommand());
@@ -385,28 +386,28 @@ public class Main {
 		Component verticalStrut_3 = Box.createVerticalStrut(10);
 		pnlOperators.add(verticalStrut_3);
 		
-		JButton btnNewButton_2 = new JButton("Oi");
+		JToggleButton btnNewButton_2 = new JToggleButton("Oi");
 		btnNewButton_2.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_2);
 		
 		Component verticalStrut = Box.createVerticalStrut(10);
 		pnlOperators.add(verticalStrut);
 		
-		JButton btnNewButton_5 = new JButton("Vivo");
+		JToggleButton btnNewButton_5 = new JToggleButton("Vivo");
 		btnNewButton_5.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_5);
 		
 		Component verticalStrut_1 = Box.createVerticalStrut(10);
 		pnlOperators.add(verticalStrut_1);
 		
-		JButton btnNewButton_4 = new JButton("Claro");
+		JToggleButton btnNewButton_4 = new JToggleButton("Claro");
 		btnNewButton_4.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_4);
 		
 		Component verticalStrut_2 = Box.createVerticalStrut(10);
 		pnlOperators.add(verticalStrut_2);
 		
-		JButton btnNewButton_3 = new JButton("Tim");
+		JToggleButton btnNewButton_3 = new JToggleButton("Tim");
 		btnNewButton_3.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(btnNewButton_3);
 		
@@ -415,19 +416,19 @@ public class Main {
 		
 		JRadioButton rdbtnRadio = new JRadioButton("RSCP");
 		rdbtnRadio.setSelected(true);
-		rdbtnRadio.setActionCommand("rscp");
+		rdbtnRadio.setActionCommand("RSCP");
 		rdbtnRadio.setAlignmentX(Component.CENTER_ALIGNMENT);
 		buttonGroup.add(rdbtnRadio);
 		pnlOperators.add(rdbtnRadio);
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("CQI");
-		rdbtnNewRadioButton_1.setActionCommand("cqi");
+		rdbtnNewRadioButton_1.setActionCommand("CQI");
 		buttonGroup.add(rdbtnNewRadioButton_1);
 		rdbtnNewRadioButton_1.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(rdbtnNewRadioButton_1);
 		
 		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Ec/I0");
-		rdbtnNewRadioButton_2.setActionCommand("ecio");
+		rdbtnNewRadioButton_2.setActionCommand("Ec/i0");
 		buttonGroup.add(rdbtnNewRadioButton_2);
 		rdbtnNewRadioButton_2.setAlignmentX(Component.CENTER_ALIGNMENT);
 		pnlOperators.add(rdbtnNewRadioButton_2);

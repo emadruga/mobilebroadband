@@ -87,18 +87,19 @@ public class Core {
 		/*
 		 * Table model needs to be created with 1 cdfPdf object at least
 		 */
-		CdfTableModel tableModel = new CdfTableModel(VivoCqicdfPdf);
+		CdfTableModel tableModel = new CdfTableModel();
 		
 		/*
 		 * after, other cdfpdfs can be added
 		 */
 		tableModel.add(TimCqicdfPdf);
 		tableModel.add(ClaroCqicdfPdf);
+		tableModel.add(VivoCqicdfPdf);
 
 		
 		Report report = new Report();
 		
-		report.showChart(tableModel, "reports/pdfTest2.prpt");
+		report.showChart(tableModel, "reports/pdfCdfMultiOperator.prpt");
 				
 	}
 

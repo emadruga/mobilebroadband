@@ -5,88 +5,76 @@ import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 import dataModel.CdfOrganizer;
-import dataModel.Valley;
 
 public class CdfTableModel extends DefaultTableModel implements IFaceTableModel {
 
 	public Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-	public Vector<Object> collumnames = new Vector<Object>();
+	public Vector<Object> columnames = new Vector<Object>();
 
-	public CdfTableModel(CdfOrganizer cdfData) {
+	public CdfTableModel() {
 		super();
-		prepare(cdfData);
-		add(cdfData);
-		printOut();
+		//add(cdfData);
+		organizeColumnNames();
+		
+		
 	}
 
-	private String[] collumnNames_Base = {"operatorName", "intervals",
-			"frequencies", "relativeFrequencies",
-			"cumulativeRelativeFrequencies", "parameter" };
+	private String[] columnNames_Base = {
+			"operatorName",
+			"parameter",
+			"intervals",
+			"frequencies",
+			"rFrequencies",
+			"crFrequencies",
+			"intervalNames"
+			};
 
-	private void prepare(CdfOrganizer cdfData) {
+
+	public void add(CdfOrganizer cdfData) {
 		Vector<Object> vector;
 		for (int i = 0; i < cdfData.intervals.size(); i++) {
 			vector = new Vector<Object>();
-			data.add(vector);
+			vector.add(cdfData.operatorName);
+			vector.add(cdfData.rFparameter);
+			vector.add(cdfData.intervals.get(i));
+			vector.add(cdfData.frequencies.get(i));
+			vector.add(cdfData.relativeFrequencies.get(i));
+			vector.add(cdfData.cumulativeRelativeFrequencies.get(i));
+			vector.add(cdfData.intervalNames.get(i));
+			this.data.add(vector);
 		}
-
-	}
-
-	public void add(CdfOrganizer cdfData) {
+		setDataVector(data, columnames);
+		for (int i = 0; i < 5; i++) {
+			System.out.println();
+		}
 		
-		for (int i = 0; i < cdfData.intervals.size(); i++) {
-			data.get(i).add(cdfData.operatorName);
-		}
-		for (int i = 0; i < cdfData.intervals.size(); i++) {
-			data.get(i).add(cdfData.intervals.get(i));
-		}
-		for (int i = 0; i < cdfData.intervals.size(); i++) {
-			data.get(i).add(cdfData.frequencies.get(i));
-		}
-		for (int i = 0; i < cdfData.intervals.size(); i++) {
-			data.get(i).add(cdfData.relativeFrequencies.get(i));
-		}
-		for (int i = 0; i < cdfData.intervals.size(); i++) {
-			data.get(i).add(cdfData.cumulativeRelativeFrequencies.get(i));
-		}
-		for (int i = 0; i < cdfData.intervals.size(); i++) {
-			data.get(i).add(cdfData.rFparameter);
-		}
-		organizeCollumnNames(cdfData.operatorName);
-		setDataVector(data, collumnames);
+		printOut();
 
-	}
-
-	private void organizeCollumnNames(String operatorName) {
-		for (int i = 0; i < collumnNames_Base.length; i++) {
-			collumnames.add(collumnNames_Base[i] + operatorName);
-		}
 	}
 
 	
 	private void printOut() {
-		for (int i = 0; i < collumnames.size(); i++) {
-			System.out.print(collumnames.get(i)+"  |  ");
+		for (int i = 0; i < this.columnames.size(); i++) {
+			System.out.print(" "+this.columnames.get(i)+" ");
 		}
 		System.out.println();
-		for (int i = 0; i < data.size(); i++) {
-			for (int j = 0; j < data.get(i).size(); j++) {
-				System.out.print(data.get(i).get(j));
+		
+		for (int i = 0; i < this.data.size(); i++) {
+			for (int j = 0; j < this.data.get(i).size(); j++) {
+				System.out.print(" "+this.data.get(i).get(j)+" ");
 			}
 			System.out.println();
 		}
 	}
 	
-	@Override
-	public Vector<Object> organizeColumnNames() {
-		// TODO Auto-generated method stub
-		return null;
+	public void organizeColumnNames() {
+		
+		for (int i = 0; i < columnNames_Base.length; i++) {
+			columnames.add(columnNames_Base[i]);
+		}
 	}
+	
+	
 
-	@Override
-	public Vector<Vector<Object>> organizeData(Vector<Valley> valleys) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }

@@ -14,8 +14,9 @@ public class CdfOrganizer {
 	public Vector<Integer> frequencies = new Vector<Integer>();
 	public Vector<Double> relativeFrequencies = new Vector<Double>();
 	public Vector<Double> cumulativeRelativeFrequencies = new Vector<Double>();
+	public Vector<String> intervalNames = new Vector<String>();
 
-	private int lowerLimit = 0, upperLimit = 0, classInterval = 0; // Put on
+	private Integer lowerLimit = null, upperLimit = null, classInterval = null; // Put on
 																	// admin.properties
 	int numberOfClasses; // Don't put on admin.properties
 	
@@ -38,25 +39,27 @@ public class CdfOrganizer {
 		Properties props = new Properties();
 		try {
 			props.load(loadPropertyFile());
-			this.lowerLimit=Integer.parseInt(props.getProperty(this.rFparameter+"lowerLimit"));
-			this.upperLimit=Integer.parseInt(props.getProperty(this.rFparameter+"upperLimit"));
-			this.classInterval=Integer.parseInt(props.getProperty(this.rFparameter+"classInterval"));
-			//numberOfClasses = Math.abs((Math.abs(upperLimit-lowerLimit)) / classInterval);
-			if (Math.abs(this.upperLimit) > Math.abs(this.lowerLimit))
-			this.numberOfClasses=(Math.abs(this.upperLimit) - Math.abs(this.lowerLimit))/this.classInterval;
-			else
-				this.numberOfClasses=(Math.abs(this.lowerLimit) - Math.abs(this.upperLimit))/this.classInterval;
-				
-				
+			this.lowerLimit = Integer.parseInt(props.getProperty(this.rFparameter + "lowerLimit"));
+			this.upperLimit = Integer.parseInt(props.getProperty(this.rFparameter + "upperLimit"));
+			this.classInterval = Integer.parseInt(props.getProperty(this.rFparameter + "classInterval"));
+
+			// classInterval);
 			
+				if (Math.abs(this.upperLimit) > Math.abs(this.lowerLimit))
+					this.numberOfClasses = (Math.abs(this.upperLimit) - Math.abs(this.lowerLimit)) / this.classInterval;
+				else
+					this.numberOfClasses = (Math.abs(this.lowerLimit) - Math.abs(this.upperLimit)) / this.classInterval;
+			
+			
+			
+
 		} catch (NumberFormatException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			if ((this.lowerLimit==null) || (this.upperLimit==null) || (this.classInterval==null)) {
+				System.out.println(this.rFparameter+"upperLimit, "+this.rFparameter+"lowerLimit or "+ this.rFparameter+"classInterval, property is missing in settings.properties");
+				
+			}
 		}
-		System.out.println(lowerLimit);
-		System.out.println(upperLimit);
-		System.out.println(classInterval
-				);
 	}
 	
 	
@@ -83,21 +86,21 @@ public class CdfOrganizer {
 
 		switch (parameter) {
 
-		case "rscp":
+		case "RSCP":
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operator == vectorOfSamples.get(i).getOperatorName())
 					vectorOfParameters.add(vectorOfSamples.get(i).getRscp());
 			}
 			break;
 
-		case "cqi":
+		case "CQI":
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operator == vectorOfSamples.get(i).getOperatorName())
 					vectorOfParameters.add(vectorOfSamples.get(i).getCqi());
 			}
 			break;
 
-		case "ecio":
+		case "Ec/i0":
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operator == vectorOfSamples.get(i).getOperatorName())
 					vectorOfParameters.add(vectorOfSamples.get(i).getEcio());
@@ -132,18 +135,17 @@ public class CdfOrganizer {
 		for (int i = 0; i < numberOfClasses; i++) {
 			int count = 0; // contador de ocorrencias na classe
 			for (int j = 0; j < vectorOfParameter.size(); j++) {
-				double cqi = vectorOfParameter.get(j); // tratar isso para ser
+				double parameter = vectorOfParameter.get(j); // tratar isso para ser
 														// universal
-				if ((cqi >= intervals.get(i))
-						&& (cqi < intervals.get(i) + classInterval)) {
+				if ((parameter >= intervals.get(i))
+						&& (parameter < intervals.get(i) + classInterval)) {
 					count++;
 				}
 
 			}
 			frequencies.add(count);
 
-			double divisao = ((double) count / (double) vectorOfParameter
-					.size());
+			double divisao = ((double) count / (double) vectorOfParameter.size());
 			relativeFrequencies.add(divisao * 100);
 		}
 
@@ -166,6 +168,20 @@ public class CdfOrganizer {
 			acuFrequencias = acuFrequencias + relativeFrequencies.get(i);
 			cumulativeRelativeFrequencies.add(acuFrequencias);
 		}
+		
+		
+		/*
+		 * formats the intervals values
+		 */
+		
+		for (int i = 0; i < this.intervals.size(); i++) {
+			String s = this.intervals.get(i).toString();
+			int y = (int) this.classInterval;
+			int x = (int) this.intervals.get(i);
+			s = s.concat("  "+(x+y));
+			this.intervalNames.add(s);
+		}
+		
 	}
 
 	/*
@@ -177,8 +193,9 @@ public class CdfOrganizer {
 		System.out.println("Tamanho: " + cumulativeRelativeFrequencies.size());
 
 		for (int i = 0; i < intervals.size(); i++) {
-			System.out.print(intervals.get(i) + " a < "
-					+ (intervals.get(i) + classInterval) + "    ");
+			//System.out.print(intervals.get(i) + " a < "+ (intervals.get(i) + classInterval) + "    ");
+			System.out.print(intervals.get(i)+"   ");
+			System.out.print(this.intervalNames.get(i)+"  ");
 			System.out.print(frequencies.get(i) + "   ");
 			System.out.print(relativeFrequencies.get(i) + "  ");
 			System.out.println(cumulativeRelativeFrequencies.get(i));
