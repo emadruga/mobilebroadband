@@ -10,7 +10,6 @@ import dataModel.Sample;
 import dataModel.Valley;
 
 public class Core {
-
 	
 	/**
 	 * Launches a report that puts side by side RF parameters with FTP informations
@@ -20,7 +19,6 @@ public class Core {
 	 * @param Delta1
 	 * @param Delta2
 	 */
-	
 	public static void launchChartFTP(String startTime, String endTime, int lenght, float Delta1, float Delta2) {
 
 		//acquiring samples
@@ -36,8 +34,7 @@ public class Core {
 		Report report = new Report();
 		
 		//showing 
-		report.showChart(tableModel, "reports/Lista_de_Vales2.prpt");
-				
+		report.showChart(tableModel, "reports/Lista_de_Vales2.prpt");	
 	}
 	
 	/**
@@ -48,8 +45,6 @@ public class Core {
 	 * @param Delta1
 	 * @param Delta2
 	 */
-
-	
 	public static void summary(String startTime, String endTime, int lenght, float Delta1, float Delta2){
 
 		//acquiring samples
@@ -72,6 +67,15 @@ public class Core {
 				
 	}
 	
+	/**
+	 * Launches a CDF x PDF report using operator's data passed by.
+	 * @param startTime
+	 * @param endTime
+	 * @param lenght
+	 * @param Delta1
+	 * @param Delta2
+	 * @param parameter
+	 */
 	public static void cdfXPdf(String startTime, String endTime, int lenght, float Delta1, float Delta2, String parameter) {
 		//acquiring samples
 		Vector<Sample> vectorOfSamples = SampleGenerator.findSamples(startTime, endTime, "", "");
@@ -79,31 +83,32 @@ public class Core {
 		/*
 		 * creates cdfPdfs objectData to each operators (There are 3 operators yet)
 		 */
-		System.out.println(parameter);
-		CdfOrganizer VivoCqicdfPdf = new CdfOrganizer(vectorOfSamples, parameter, "Vivo");
-		CdfOrganizer TimCqicdfPdf = new CdfOrganizer(vectorOfSamples, parameter, "Claro");
-		CdfOrganizer ClaroCqicdfPdf = new CdfOrganizer(vectorOfSamples, parameter, "TIM");
+		CdfOrganizer vivoData = new CdfOrganizer(vectorOfSamples, parameter, "Vivo");
+		CdfOrganizer timData = new CdfOrganizer(vectorOfSamples, parameter, "Claro");
+		CdfOrganizer claroData = new CdfOrganizer(vectorOfSamples, parameter, "TIM");
 		
 		/*
-		 * Table model needs to be created with 1 cdfPdf object at least
+		 * creates a empty table model.
 		 */
 		CdfTableModel tableModel = new CdfTableModel();
 		
 		/*
-		 * after, other cdfpdfs can be added
+		 * add operator's data to table model
 		 */
-		tableModel.add(TimCqicdfPdf);
-		tableModel.add(ClaroCqicdfPdf);
-		tableModel.add(VivoCqicdfPdf);
+		tableModel.add(timData);
+		tableModel.add(claroData);
+		tableModel.add(vivoData);
 
-		
+		/*
+		 * instantiates a report
+		 */
 		Report report = new Report();
 		
+		/*
+		 * show 
+		 */
 		report.showChart(tableModel, "reports/pdfCdfMultiOperator.prpt");
 				
 	}
 
-	/*
-	 * Other methods to generate different reports
-	 */
 }

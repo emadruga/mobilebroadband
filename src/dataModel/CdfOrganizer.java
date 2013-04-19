@@ -15,13 +15,25 @@ public class CdfOrganizer {
 	public Vector<Double> relativeFrequencies = new Vector<Double>();
 	public Vector<Double> cumulativeRelativeFrequencies = new Vector<Double>();
 	public Vector<String> intervalNames = new Vector<String>();
-
-	private Integer lowerLimit = null, upperLimit = null, classInterval = null; // Put on
-																	// admin.properties
-	int numberOfClasses; // Don't put on admin.properties
-	
+	private Integer lowerLimit = null, upperLimit = null, classInterval = null; 																// admin.properties
+	int numberOfClasses; 
 	private static final String settingsPropertiesFolder = "config";
 	private static final String settingsPropertyFileName = "settings.properties";
+	
+	/*
+	 * constructor
+	 */
+	public CdfOrganizer(Vector<Sample> vectorOfSamples, String parameter, String operatorName) {
+		
+		// set some variables
+		this.rFparameter = parameter;
+		this.operatorName = operatorName;
+		loadParameters();
+	
+		generateData(retrieveParameteres(vectorOfSamples, this.rFparameter,
+				this.operatorName));
+		printOut();
+	}
 	
 	private FileInputStream loadPropertyFile() {
 		FileInputStream input = null;
@@ -63,22 +75,6 @@ public class CdfOrganizer {
 	}
 	
 	
-	
-	/*
-	 * constructor
-	 */
-	public CdfOrganizer(Vector<Sample> vectorOfSamples, String parameter,
-			String operatorName) {
-		// set some variables
-		this.rFparameter = parameter;
-		this.operatorName = operatorName;
-		loadParameters();
-		
-		generateData(retrieveParameteres(vectorOfSamples, this.rFparameter,
-				this.operatorName));
-		printOut();
-	}
-
 	// Creates a simple vector of values to be used
 	private Vector<Double> retrieveParameteres(Vector<Sample> vectorOfSamples,
 			String parameter, String operator) {
@@ -118,7 +114,6 @@ public class CdfOrganizer {
 
 	private void generateData(Vector<Double> vectorOfParameter) {
 		
-		
 		/*
 		 * prepara um vetor com os valores de referencia dos intervalos
 		 */
@@ -126,7 +121,6 @@ public class CdfOrganizer {
 		for (int i = 0; i < numberOfClasses; i++) {
 			intervals.add(acuIntervalo);
 			acuIntervalo = acuIntervalo + classInterval;
-
 		}
 
 		/*
@@ -135,13 +129,11 @@ public class CdfOrganizer {
 		for (int i = 0; i < numberOfClasses; i++) {
 			int count = 0; // contador de ocorrencias na classe
 			for (int j = 0; j < vectorOfParameter.size(); j++) {
-				double parameter = vectorOfParameter.get(j); // tratar isso para ser
-														// universal
+				double parameter = vectorOfParameter.get(j); 
 				if ((parameter >= intervals.get(i))
 						&& (parameter < intervals.get(i) + classInterval)) {
 					count++;
 				}
-
 			}
 			frequencies.add(count);
 
@@ -162,18 +154,15 @@ public class CdfOrganizer {
 		 * Calculates the acu
 		 */
 		cumulativeRelativeFrequencies.add(relativeFrequencies.get(0));
-
 		double acuFrequencias = 0;
 		for (int i = 0; i < relativeFrequencies.size(); i++) {
 			acuFrequencias = acuFrequencias + relativeFrequencies.get(i);
 			cumulativeRelativeFrequencies.add(acuFrequencias);
 		}
 		
-		
 		/*
 		 * formats the intervals values
 		 */
-		
 		for (int i = 0; i < this.intervals.size(); i++) {
 			String s = this.intervals.get(i).toString();
 			int y = (int) this.classInterval;
@@ -181,7 +170,6 @@ public class CdfOrganizer {
 			s = s.concat("  "+(x+y));
 			this.intervalNames.add(s);
 		}
-		
 	}
 
 	/*
