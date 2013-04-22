@@ -6,6 +6,7 @@ import tableModel.SummaryTableModel;
 import tableModel.ValleyTableModel;
 import aux.Report;
 import dataModel.CdfOrganizer;
+import dataModel.CdfOrganizer2;
 import dataModel.Sample;
 import dataModel.Valley;
 
@@ -84,9 +85,11 @@ public class Core {
 		 * creates cdfPdfs objectData to each operators (There are 3 operators yet)
 		 */
 		CdfOrganizer vivoData = new CdfOrganizer(vectorOfSamples, parameter, "Vivo");
+		vivoData.init();
 		CdfOrganizer timData = new CdfOrganizer(vectorOfSamples, parameter, "Claro");
+		timData.init();
 		CdfOrganizer claroData = new CdfOrganizer(vectorOfSamples, parameter, "TIM");
-		
+		claroData.init();
 		/*
 		 * creates a empty table model.
 		 */
@@ -111,4 +114,30 @@ public class Core {
 				
 	}
 
+	public static void chart3D(String startTime, String endTime, int lenght, float Delta1, float Delta2, String parameter, int tput) {
+		Vector<Sample> vectorOfSamples = SampleGenerator.findSamples(startTime, endTime, "", "");
+		
+		/*
+		 * creates cdfPdfs objectData to each operators (There are 3 operators yet)
+		 */
+		CdfOrganizer2 claroData = new CdfOrganizer2(vectorOfSamples, parameter, "Claro", tput);
+		claroData.init();
+		
+		CdfOrganizer2 timData = new CdfOrganizer2(vectorOfSamples, parameter, "TIM", tput);
+		timData.init();
+		
+		CdfOrganizer2 vivoData = new CdfOrganizer2(vectorOfSamples, parameter, "Vivo", tput);
+		vivoData.init();
+		
+		CdfTableModel tableModel = new CdfTableModel();
+		
+		tableModel.add(claroData);
+		tableModel.add(timData);
+		tableModel.add(vivoData);
+		
+		Report report = new Report();
+		
+		report.showChart(tableModel, "reports/pdfCdfMultiOperator.prpt");
+
+	}
 }
