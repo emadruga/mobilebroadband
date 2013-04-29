@@ -26,7 +26,8 @@ public class CdfTableModel extends DefaultTableModel implements IFaceTableModel 
 			"frequencies",
 			"rFrequencies",
 			"crFrequencies",
-			"intervalNames"
+			"intervalNames",
+			"tput"
 			};
 
 
@@ -41,6 +42,10 @@ public class CdfTableModel extends DefaultTableModel implements IFaceTableModel 
 			vector.add(cdfData.relativeFrequencies.get(i));
 			vector.add(cdfData.cumulativeRelativeFrequencies.get(i));
 			vector.add(cdfData.intervalNames.get(i));
+			
+			if (cdfData.tput!=null)
+				vector.add("Throughput Analysed: "+cdfData.tput+" KBps");
+			
 			this.data.add(vector);
 		}
 		setDataVector(data, columnames);

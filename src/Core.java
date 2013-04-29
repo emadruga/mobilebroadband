@@ -8,6 +8,7 @@ import aux.Report;
 import dataModel.CdfOrganizer;
 import dataModel.CdfOrganizer2;
 import dataModel.Sample;
+import dataModel.SummaryOrganizer;
 import dataModel.Valley;
 
 public class Core {
@@ -57,14 +58,23 @@ public class Core {
 		Vector<Valley> vectorOfValley = ValleyGenerator.findValleysOnSamples(vectorOfSamples, lenght, Delta1, Delta2);
 
 		//populating a table model
+		SummaryOrganizer claroSummaryData= new SummaryOrganizer(vectorOfValley, "Claro");
+		SummaryOrganizer vivoSummaryData= new SummaryOrganizer(vectorOfValley, "Vivo");
+		SummaryOrganizer timSummaryData= new SummaryOrganizer(vectorOfValley, "TIM");
+		SummaryOrganizer oiSummaryData= new SummaryOrganizer(vectorOfValley, "Oi");
 		
-		SummaryTableModel tableModel= new SummaryTableModel(vectorOfValley);
+		SummaryTableModel summaryTableModel = new SummaryTableModel();
+		
+		summaryTableModel.add(claroSummaryData);
+		summaryTableModel.add(vivoSummaryData);
+		summaryTableModel.add(timSummaryData);
+		summaryTableModel.add(oiSummaryData);
 		
 		//creating a new Report Object
 		Report report = new Report();
 		
 		//showing 
-		report.showChart(tableModel, "reports/Summary.prpt");
+		report.showChart(summaryTableModel, "reports/Summary.prpt");
 				
 	}
 	

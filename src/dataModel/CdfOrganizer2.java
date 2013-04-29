@@ -5,15 +5,12 @@ import java.util.Vector;
 
 public class CdfOrganizer2 extends CdfOrganizer {
 
-	private int tput;
 	private Vector<Integer> vThroughputs = new Vector<Integer>();
-	
 	
 	public CdfOrganizer2(Vector<Sample> vectorOfSamples, String parameter, String operatorName, int tPut) {
 		super(vectorOfSamples, parameter, operatorName);
 		
 		this.tput=tPut;
-		
 		this.rFparameter = parameter;
 		this.operatorName = operatorName;	
 	}

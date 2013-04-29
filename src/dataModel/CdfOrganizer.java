@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.Vector;
 
-import java_cup.production;
-
 public class CdfOrganizer {
 
 	//auxiliares
@@ -25,6 +23,7 @@ public class CdfOrganizer {
 	protected int numberOfClasses; 
 	protected Vector<Double>vParameter;
 	protected Vector<Sample> vectorOfSamples = new Vector<Sample>();
+	public Integer tput=null;
 	
 	//config properties
 	private static final String settingsPropertiesFolder = "config";

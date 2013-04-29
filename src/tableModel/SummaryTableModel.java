@@ -4,67 +4,65 @@ import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
-import dataModel.Valley;
+import dataModel.SummaryOrganizer;
 
-public class SummaryTableModel extends DefaultTableModel implements IFaceTableModel{
-	
-	public SummaryTableModel(Vector<Valley> valleys){
-		super();
-		setDataVector(organizeData(valleys), organizeColumnNames());
-	}	
+public class SummaryTableModel extends DefaultTableModel implements
+		IFaceTableModel {
 
-	Object columnNames[] = new Object[] {
-			"all",
-			"cqi",
-			"ecio",
-			"rscp",
-			"cqiAecio",
-			"cqiArscp",
-			"ecioArscp",
-			"nothing"
-			};
-	private int all;
-	private int cqi;
-	private int ecio;
-	private int rscp;
-	private int cqiAecio;
-	private int cqiArscp;
-	private int ecioArscp;
-	private int nothing;
+	private Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+	private Vector<Object> columnNames = new Vector<Object>();
 
-	public Vector<Object> organizeColumnNames() {
-		Vector<Object> names = new Vector<Object>();
-		for (int i = 0; i < columnNames.length; i++) {
-			names.add(columnNames[i]);
+	Object columnNamesBase[] = new Object[] { "all", "cqi", "ecio", "rscp",
+			"cqiAecio", "cqiArscp", "ecioArscp", "nothing", "moreThenOne",
+			"operatorName" };
+
+	public void organizeColumnNames() {
+		this.columnNames = new Vector<Object>();
+		for (int i = 0; i < columnNamesBase.length; i++) {
+			columnNames.add(columnNamesBase[i]);
 		}
-		return names;
 	}
-	
-	public Vector<Vector<Object>> organizeData(Vector<Valley> valleys) {
-		
-		for (Valley valley : valleys) {
-			if (valley.testForCqiProblem() && valley.testForEcioProblem() && valley.testForRscpProblem())
-				all++;
-			if (valley.testForCqiProblem() && !valley.testForEcioProblem() && !valley.testForRscpProblem()) cqi++;
-			if (!valley.testForCqiProblem() && valley.testForEcioProblem() && !valley.testForRscpProblem()) ecio++;
-			if (!valley.testForCqiProblem() && !valley.testForEcioProblem() && valley.testForRscpProblem()) rscp++;
-			if (valley.testForCqiProblem() && valley.testForEcioProblem() && !valley.testForRscpProblem()) cqiAecio++;
-			if (valley.testForCqiProblem() && !valley.testForEcioProblem() && valley.testForRscpProblem()) cqiArscp++;
-			if (!valley.testForCqiProblem() && valley.testForEcioProblem() && valley.testForRscpProblem()) ecioArscp++;
-			if (!valley.testForCqiProblem() && !valley.testForEcioProblem() && !valley.testForRscpProblem()) nothing++;
-		}
-		
-		Vector<Vector<Object>> finalVector = new Vector<Vector<Object>>();
+
+	public void add(SummaryOrganizer summary) {
 		Vector<Object> vector = new Vector<Object>();
-		vector.add(all);
-		vector.add(cqi);
-		vector.add(ecio);
-		vector.add(rscp);
-		vector.add(cqiAecio);
-		vector.add(cqiArscp);
-		vector.add(ecioArscp);
-		vector.add(nothing);
-		finalVector.add(vector);
-		return finalVector;
-	}	
+		for (int i = 0; i < summary.finalVector.size(); i++) {
+			for (int j = 0; j < summary.finalVector.get(i).size(); j++) {
+				vector.add(summary.finalVector.get(i).get(j));
+			}
+			data.add(vector);
+		}
+		organizeColumnNames();
+		setDataVector(data, columnNames);
+		//printout();
+	}
+
+	private void printOut() {
+		for (int i = 0; i < columnNames.size(); i++) {
+			System.out.print(columnIdentifiers.get(i) + "   ");
+		}
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = 0; j < data.get(i).size(); j++) {
+				System.out.print(data.get(i).get(j) + "  ");
+			}
+			System.out.println();
+		}
+		System.out.println();
+		System.out.println();
+		System.out.println();
+	}
+
+	public SummaryTableModel(SummaryOrganizer summary) {
+		super();
+		organizeColumnNames();
+		add(summary);
+		setDataVector(data, columnNames);
+	}
+
+	public SummaryTableModel() {
+		super();
+	}
+
 }
