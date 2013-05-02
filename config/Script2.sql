@@ -1,1 +1,1 @@
-SELECT * from cqi_ecio_rscp_ftp
+SELECT * from TABLENAME WHERE WHERECLAUSULE

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Vector;
 
 public class QueryReader {
 
@@ -62,4 +63,23 @@ public class QueryReader {
 		return retrieveQueryByFilename(retrieveFileNameByQueryName(queryName));
 	}
 
+	
+	public static String adjustOperator (Vector<Integer> operators) {
+		String query = new String();
+		for (int i = 0; i < operators.size(); i++) {
+			query = query.concat(" `MNC` = "+operators.get(i));
+			if (i != operators.size()-1)
+				query = query.concat(" AND");
+		}
+		return query;
+	}
+	
+	public static void adjustCampaign() {
+		
+	}
+	
+	
+	
+	
+	
 }

@@ -13,10 +13,12 @@ public class DbPropertiesSelector {
 	
 	public DbPropertiesSelector(String fileName){
 		
+		this.properties.setProperty("mysqlTable", "TABLE");
 		this.properties.setProperty("mysqlUser", "DB USER");
 		this.properties.setProperty("mysqlPassword", "DB PASSWORD");
 		this.properties.setProperty("mysqlDatabase", "DATABASE");
 		this.properties.setProperty("mysqlServer", "ADDRESS SERVER");
+		
 		
 		if (new File(fileName).exists()) {
 			System.out.println("dbProperties.xml found in config folder");
@@ -79,5 +81,8 @@ public class DbPropertiesSelector {
 	
 	public String getPassword() {
 		return this.properties.getProperty("mysqlPassword");
+	}
+	public String getTable() {
+		return this.properties.getProperty("mysqlTable");
 	}
 }

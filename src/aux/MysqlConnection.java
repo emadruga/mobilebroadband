@@ -10,7 +10,7 @@ public class MysqlConnection {
 	private String banco = "";
 	private String usuario = "";
 	private String senha = "";
-	// private String porta="3316";
+	public static String table="";
 	private boolean estaConectado = false;
 
 	public Connection getConexao() {
@@ -68,6 +68,7 @@ public class MysqlConnection {
 		this.banco = properties.getDatabase();
 		this.usuario = properties.getUser();
 		this.senha = properties.getPassword();
+		this.table = properties.getTable();
 	}
 
 

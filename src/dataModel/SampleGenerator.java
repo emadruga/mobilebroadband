@@ -1,16 +1,17 @@
+package dataModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
 import aux.MysqlConnection;
-import aux.QueryReader;
-import dataModel.Sample;
+import aux.QueryConstructor;
 
 public class SampleGenerator {
 
 	private static String queryNameUsed = "query4";
-	private static String queriesFile = "config/dbProperties.xml";
+	private static String dbParametersFile = "config/dbProperties.xml";
+
 
 	/**
 	 * Populates <code>Sample</code>'s data 
@@ -22,9 +23,9 @@ public class SampleGenerator {
 			throws SQLException {
 
 		Sample oneSample = new Sample();
-		oneSample.setMsgId(resultSet.getInt("id"));
-		oneSample.setSessionId(resultSet.getInt("SessionId"));
-		oneSample.setMsgTime(resultSet.getTimestamp("MsgTime"));
+		oneSample.setMsgId(resultSet.getInt("ftp_msgid"));
+		oneSample.setSessionId(resultSet.getInt("sessionid"));
+		oneSample.setMsgTime(resultSet.getTimestamp("msgtime"));
 		oneSample.setThroughput(resultSet.getInt("throughput"));
 		oneSample.setLatitude(resultSet.getInt("latitude"));
 		oneSample.setLongitude(resultSet.getInt("longitude"));
@@ -40,41 +41,13 @@ public class SampleGenerator {
 		return oneSample;
 	}
 
-	/**
-	 * Put other filter parameters in original SQL query
-	 * @param startTime
-	 * @param endTime
-	 * @return
-	 */
-	private static String queryPrepare(String startTime, String endTime) {
-		String preparedQuery = "";
-		String query = QueryReader.retrieveQueryByName(queryNameUsed);
-		preparedQuery = query.concat(" WHERE ");
-
-		if ((startTime != "" || startTime != null)
-				&& (endTime != "" || endTime != null))
-			preparedQuery = preparedQuery.concat(" `msgtime` BETWEEN '"
-					+ startTime + " 00:00:00' AND '" + endTime + " 23:59:59'");
-		return preparedQuery;
-
-	}
-
-	
-	/**
-	 * Retrieves all samples described in SQL query used and put them in a Vector of Samples
-	 * @param startTime
-	 * @param endTime
-	 * @param location
-	 * @param company
-	 * @return
-	 */
-	public static Vector<Sample> findSamples(String startTime, String endTime, String location, String company){
+	public static Vector<Sample> findSamples(Vector<Integer> operators, Vector<String> campaingsList){
 
 		// Variables Declaration
 		Vector<Sample> vectorOfSamples = new Vector<Sample>();
-		MysqlConnection connection = new MysqlConnection(queriesFile);
+		MysqlConnection connection = new MysqlConnection(dbParametersFile);
 
-		String query = queryPrepare(startTime, endTime);
+		String query = QueryConstructor.queryPrepare(queryNameUsed, operators, campaingsList);
 		System.out.println("Sample Generator -- Query: " + query);
 		connection.conectar();
 

@@ -1,9 +1,8 @@
+package dataModel;
 
 import java.sql.Timestamp;
 import java.util.Vector;
 
-import dataModel.Sample;
-import dataModel.Valley;
 
 public class ValleyGenerator {
 

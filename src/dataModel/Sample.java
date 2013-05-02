@@ -9,8 +9,8 @@ import java.sql.Timestamp;
 public class Sample {
 
 	// Session / Data packet parameters
-	private int msgId = 0;
-	private int sessionId = 0;
+	private int ftp_msgId = 0;
+	private int sessionid = 0;
 	private Timestamp msgTime = null;
 
 	// Position Parameters
@@ -52,7 +52,7 @@ public class Sample {
 		case 11:
 			name = vivoName;
 			break;
-		case 999:
+		case 31:
 			name = oiName;
 			break;
 		default:
@@ -71,19 +71,19 @@ public class Sample {
 	 */
 	
 	public int getMsgId() {
-		return msgId;
+		return ftp_msgId;
 	}
 
 	public void setMsgId(int msgId) {
-		this.msgId = msgId;
+		this.ftp_msgId = msgId;
 	}
 
 	public int getSessionId() {
-		return sessionId;
+		return sessionid;
 	}
 
 	public void setSessionId(int sessionId) {
-		this.sessionId = sessionId;
+		this.sessionid = sessionId;
 	}
 
 	public Timestamp getMsgTime() {
