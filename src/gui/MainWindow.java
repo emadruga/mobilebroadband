@@ -43,8 +43,7 @@ public class MainWindow extends JFrame {
 	private JToggleButton btnVivo;
 	private JTable table;
 	private Vector<String> campaignsList = new Vector<String>();
-	private String errorCampaing="At least one campaign must be selected. To select, use control (win) or command (mac) and shift keys." +
-			"";
+	private String errorCampaing="At least one campaign must be selected. To select, use control (win) or command (mac) and shift keys";
 
 	//private TableModel model = new DefaultTableModel();
 	private JPanel panel_2;
