@@ -3,16 +3,16 @@ package dataModel;
 import java.util.Vector;
 
 
-public class CdfOrganizer2 extends CdfOrganizer {
+public class CdfWhithTput extends CdfOrganizer {
 
 	private Vector<Integer> vThroughputs = new Vector<Integer>();
 	
-	public CdfOrganizer2(Vector<Sample> vectorOfSamples, String parameter, String operatorName, int tPut) {
+	public CdfWhithTput(Vector<Sample> vectorOfSamples, String parameter, String operatorName, int tPut) {
 		super(vectorOfSamples, parameter, operatorName);
 		
 		this.tput=tPut;
 		this.rFparameter = parameter;
-		this.operatorName = operatorName;	
+		this.operatorName = operatorName;
 	}
 	
 	// Creates a simple vector of values to be used
@@ -70,6 +70,7 @@ public class CdfOrganizer2 extends CdfOrganizer {
 							&& (parameter < intervals.get(i) + classInterval)
 							&& (throughput >= this.tput)) {
 						count++;
+						countSamples++;
 					}
 				}
 				frequencies.add(count);

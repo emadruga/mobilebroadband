@@ -3,6 +3,7 @@ package dataModel;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -24,7 +25,10 @@ public class CdfOrganizer {
 	protected Vector<Double>vParameter;
 	protected Vector<Sample> vectorOfSamples = new Vector<Sample>();
 	public Integer tput=null;
-	
+	private SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+	public String date;
+	public int numSamples;
+	public int countSamples;
 	//config properties
 	private static final String settingsPropertiesFolder = "config";
 	private static final String settingsPropertyFileName = "settings.properties";
@@ -38,7 +42,7 @@ public class CdfOrganizer {
 		this.rFparameter = parameter;
 		this.operatorName = operatorName;
 		this.vectorOfSamples = vectorOfSamples;
-		
+		this.date = df.format(vectorOfSamples.get(0).getMsgTime());
 		
 	}
 	
@@ -50,11 +54,16 @@ public class CdfOrganizer {
 		calcRelativeFrequencies();
 		calcCumulate();
 		formatIntervalValues();
-		
+		setNumSamples();
 		printOut();
 	}
 	
 	// Creates a simple vector of values to be used
+	
+	protected void setNumSamples() {
+		this.numSamples=this.vParameter.size();
+	}
+
 	protected void retrieveParameteres() {
 		
 		vParameter = new Vector<Double>();
@@ -112,6 +121,7 @@ public class CdfOrganizer {
 				if ((parameter >= intervals.get(i))
 						&& (parameter < intervals.get(i) + classInterval)) {
 					count++;
+					countSamples++;
 				}
 			}
 			frequencies.add(count);

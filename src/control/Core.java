@@ -16,7 +16,7 @@ import aux.MysqlConnection;
 import aux.QueryConstructor;
 import aux.Report;
 import dataModel.CdfOrganizer;
-import dataModel.CdfOrganizer2;
+import dataModel.CdfWhithTput;
 import dataModel.Sample;
 import dataModel.SampleGenerator;
 import dataModel.SummaryOrganizer;
@@ -203,25 +203,25 @@ public class Core {
 		for (int i = 0; i < operatorsSelected.size(); i++) {
 			switch (operatorsSelected.get(i)) {
 			case 2: 
-				CdfOrganizer2 timData = new CdfOrganizer2(vectorOfSamples, parameter, "TIM", tput);
+				CdfWhithTput timData = new CdfWhithTput(vectorOfSamples, parameter, "TIM", tput);
 				timData.init();
 				tableModel.add(timData);
 				break;
 				
 			case 5: 
-				CdfOrganizer2 claroData = new CdfOrganizer2(vectorOfSamples, parameter, "Claro", tput);
+				CdfWhithTput claroData = new CdfWhithTput(vectorOfSamples, parameter, "Claro", tput);
 				claroData.init();
 				tableModel.add(claroData);
 				break;
 				
 			case 11: 
-				CdfOrganizer2 vivoData = new CdfOrganizer2(vectorOfSamples, parameter, "Vivo", tput);
+				CdfWhithTput vivoData = new CdfWhithTput(vectorOfSamples, parameter, "Vivo", tput);
 				vivoData.init();
 				tableModel.add(vivoData);
 				break;
 				
 			case 31: 
-				CdfOrganizer2 oiData = new CdfOrganizer2(vectorOfSamples, parameter, "Oi", tput);
+				CdfWhithTput oiData = new CdfWhithTput(vectorOfSamples, parameter, "Oi", tput);
 				oiData.init();
 				tableModel.add(oiData);
 				break;
