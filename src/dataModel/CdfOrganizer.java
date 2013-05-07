@@ -67,33 +67,26 @@ public class CdfOrganizer {
 	protected void retrieveParameteres() {
 		
 		vParameter = new Vector<Double>();
-		switch (this.rFparameter) {
-
-		case "RSCP":
+		if (this.rFparameter.equals("RSCP")) {
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (this.operatorName == vectorOfSamples.get(i).getOperatorName())
 					this.vParameter.add(vectorOfSamples.get(i).getRscp());
 			}
-			break;
-
-		case "CQI":
+		} else if (this.rFparameter.equals("CQI")) {
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operatorName == vectorOfSamples.get(i).getOperatorName())
 					this.vParameter.add(vectorOfSamples.get(i).getCqi());
 			}
-			break;
+		} else if (this.rFparameter.equals("Ec/i0")) {
 
-		case "Ec/i0":
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operatorName == vectorOfSamples.get(i).getOperatorName())
 					this.vParameter.add(vectorOfSamples.get(i).getEcio());
 			}
-			break;
 
-		default:
+		} else {
 			System.out.println("You have to select an option.");
 			System.exit(0);
-			break;
 		}
 		
 		
@@ -192,15 +185,15 @@ public class CdfOrganizer {
 	
 			// classInterval);
 			
-				if (Math.abs(this.upperLimit) > Math.abs(this.lowerLimit))
-					this.numberOfClasses = (Math.abs(this.upperLimit) - Math.abs(this.lowerLimit)) / this.classInterval;
-				else
-					this.numberOfClasses = (Math.abs(this.lowerLimit) - Math.abs(this.upperLimit)) / this.classInterval;
+		       	if (Math.abs(this.upperLimit) > Math.abs(this.lowerLimit))
+	       			this.numberOfClasses = (Math.abs(this.upperLimit) - Math.abs(this.lowerLimit)) / this.classInterval;
+       			else
+		       		this.numberOfClasses = (Math.abs(this.lowerLimit) - Math.abs(this.upperLimit)) / this.classInterval;
 			
 			
 			
 	
-		} catch (NumberFormatException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			if ((this.lowerLimit==null) || (this.upperLimit==null) || (this.classInterval==null)) {
 				System.out.println(this.rFparameter+"upperLimit, "+this.rFparameter+"lowerLimit or "+ this.rFparameter+"classInterval, property is missing in settings.properties");

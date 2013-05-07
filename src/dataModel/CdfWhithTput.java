@@ -20,9 +20,8 @@ public class CdfWhithTput extends CdfOrganizer {
 	protected void retrieveParameteres() {
 		vParameter = new Vector<Double>();
 		vThroughputs = new Vector<Integer>();
-		switch (rFparameter) {
+		if (rFparameter.equals("RSCP")) {
 
-		case "RSCP":
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operatorName == vectorOfSamples.get(i).getOperatorName()) {
 					this.vParameter.add(vectorOfSamples.get(i).getRscp());
@@ -30,30 +29,27 @@ public class CdfWhithTput extends CdfOrganizer {
 				}
 
 			}
-			break;
+		} else if (rFparameter.equals("CQI")) {
 
-		case "CQI":
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operatorName == vectorOfSamples.get(i).getOperatorName()) {
 					this.vParameter.add(vectorOfSamples.get(i).getCqi());
 					this.vThroughputs.add(vectorOfSamples.get(i).getThroughput());
 				}
 			}
-			break;
 
-		case "Ec/i0":
-			for (int i = 0; i < vectorOfSamples.size(); i++) {
-				if (operatorName == vectorOfSamples.get(i).getOperatorName()) {
-					this.vParameter.add(vectorOfSamples.get(i).getEcio());
-					this.vThroughputs.add(vectorOfSamples.get(i).getThroughput());
-				}
+		} else if (rFparameter.equals("Ec/i0")) {
+
+		    for (int i = 0; i < vectorOfSamples.size(); i++) {
+			if (operatorName == vectorOfSamples.get(i).getOperatorName()) {
+			    this.vParameter.add(vectorOfSamples.get(i).getEcio());
+			    this.vThroughputs.add(vectorOfSamples.get(i).getThroughput());
 			}
-			break;
+		    }
+		} else {
 
-		default:
 			System.out.println("You have to select an option.");
 			System.exit(0);
-			break;
 		}
 
 	}
