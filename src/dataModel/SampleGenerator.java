@@ -4,8 +4,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
 
-import aux.MysqlConnection;
-import aux.QueryConstructor;
+import misc.MysqlConnection;
+import misc.QueryConstructor;
 
 public class SampleGenerator {
 

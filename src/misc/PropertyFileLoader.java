@@ -1,4 +1,4 @@
-package aux;
+package misc;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

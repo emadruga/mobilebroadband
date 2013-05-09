@@ -9,7 +9,7 @@ import java.util.Vector;
 
 public class CdfOrganizer {
 
-	//auxiliares
+	//misciliares
 	public String rFparameter = null;
 	public String operatorName = null;
 	
@@ -67,36 +67,29 @@ public class CdfOrganizer {
 	protected void retrieveParameteres() {
 		
 		vParameter = new Vector<Double>();
-		switch (this.rFparameter) {
 
-		case "RSCP":
+		if (this.rFparameter == "RSCP") {
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
-				if (this.operatorName == vectorOfSamples.get(i).getOperatorName())
+				if (this.operatorName == vectorOfSamples.get(i)
+						.getOperatorName())
 					this.vParameter.add(vectorOfSamples.get(i).getRscp());
 			}
-			break;
+		}
 
-		case "CQI":
+		if (this.rFparameter == "CQI") {
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operatorName == vectorOfSamples.get(i).getOperatorName())
 					this.vParameter.add(vectorOfSamples.get(i).getCqi());
 			}
-			break;
+		}
 
-		case "Ec/i0":
+		if (this.rFparameter == "Ec/i0") {
 			for (int i = 0; i < vectorOfSamples.size(); i++) {
 				if (operatorName == vectorOfSamples.get(i).getOperatorName())
 					this.vParameter.add(vectorOfSamples.get(i).getEcio());
 			}
-			break;
-
-		default:
-			System.out.println("You have to select an option.");
-			System.exit(0);
-			break;
 		}
-		
-		
+
 	}
 
 	protected void prepareIntervals() {
@@ -117,7 +110,7 @@ public class CdfOrganizer {
 		for (int i = 0; i < numberOfClasses; i++) {
 			int count = 0; // contador de ocorrencias na classe
 			for (int j = 0; j < vParameter.size(); j++) {
-				double parameter = vParameter.get(j); 
+				double parameter = vParameter.get(j);
 				if ((parameter >= intervals.get(i))
 						&& (parameter < intervals.get(i) + classInterval)) {
 					count++;
@@ -125,9 +118,10 @@ public class CdfOrganizer {
 				}
 			}
 			frequencies.add(count);
-
-			double divisao = ((double) count / (double) vParameter.size());
-			relativeFrequencies.add(divisao * 100);
+			/*
+			 * double divisao = ((double) count / (double) vParameter.size());
+			 * relativeFrequencies.add(divisao * 100);
+			 */
 		}
 	}
 	
@@ -136,23 +130,44 @@ public class CdfOrganizer {
 		/*
 		 * Calc relative frequencies
 		 */
+		relativeFrequencies=new Vector<Double>();
+		for (int i = 0; i < numberOfClasses; i++) {
+			double d=((double) (frequencies.get(i))/countSamples)*100;
+			
+			
+			relativeFrequencies.add(d);
+		}
+		
+		/*
 		double somaDasFrequenciasRelativas = 0;
-		for (int i = 0; i < relativeFrequencies.size(); i++) {
+		for (int i = 0; i < numberOfClasses; i++) {
 			somaDasFrequenciasRelativas = somaDasFrequenciasRelativas
 					+ relativeFrequencies.get(i);
 		}
+		*/
+		
 	}
 	
 	protected void calcCumulate () {
 		/*
 		 * Calculates the acu
 		 */
-		cumulativeRelativeFrequencies.add(relativeFrequencies.get(0));
-		double acuFrequencias = 0;
+
 		for (int i = 0; i < relativeFrequencies.size(); i++) {
-			acuFrequencias = acuFrequencias + relativeFrequencies.get(i);
-			cumulativeRelativeFrequencies.add(acuFrequencias);
+		//for (int i = relativeFrequencies.size() -1; i>= 0; i--) {
+			if(i==0) {
+				cumulativeRelativeFrequencies.add(relativeFrequencies.get(i));
+			}
+			else
+				cumulativeRelativeFrequencies.add(
+						relativeFrequencies.get(i)+cumulativeRelativeFrequencies.get(i-1));
 		}
+		
+		Vector<Double>nv = new Vector<Double>();
+		for (int i = 0; i < cumulativeRelativeFrequencies.size(); i++) {
+			nv.add(100-cumulativeRelativeFrequencies.get(i));
+		}
+		cumulativeRelativeFrequencies=nv;
 	}
 	
 	protected void formatIntervalValues() {
@@ -200,7 +215,7 @@ public class CdfOrganizer {
 			
 			
 	
-		} catch (NumberFormatException | IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			if ((this.lowerLimit==null) || (this.upperLimit==null) || (this.classInterval==null)) {
 				System.out.println(this.rFparameter+"upperLimit, "+this.rFparameter+"lowerLimit or "+ this.rFparameter+"classInterval, property is missing in settings.properties");

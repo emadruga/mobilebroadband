@@ -1,4 +1,4 @@
-package aux;
+package misc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
