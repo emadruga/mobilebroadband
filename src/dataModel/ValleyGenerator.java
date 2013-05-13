@@ -68,18 +68,18 @@ public class ValleyGenerator {
 	public  static Vector<Valley> findValleysOnSamples(Vector<Sample> sampleList,
 			int lenght, float Delta1, float Delta2) {
 
-		int start = 0;
-		int valley = 0;
-		int end = 0;
+		int start = 0; //start possible valley
+		int possibleValley = 0; 
+		int end = 0; 
 		int count = 0;
 		Vector<Valley> vectorOfValley = null; 
 		 
 		while (start < sampleList.size() ) {
 		   
-			valley = interestingWayDown(sampleList, start, Delta1);
+			possibleValley = interestingWayDown(sampleList, start, Delta1);
 		    
-			if (valley > 0) {
-			end = interestingWayUp(sampleList,valley, Delta2);
+			if (possibleValley > 0) {
+			end = interestingWayUp(sampleList,possibleValley, Delta2);
 			if (end > 0) {
 			    Sample sampleS = sampleList.get(start);
 			    Sample sampleE = sampleList.get(end);
@@ -94,13 +94,13 @@ public class ValleyGenerator {
 				    vectorOfValley = new Vector<Valley>();
 				}
 				//System.out.println("Diff (secs): "+ diff(timeE, timeS) + " ts: " + timeS + " te: " + timeE );
-				appendValley(sampleList, vectorOfValley, count, start, valley, end);
+				appendValley(sampleList, vectorOfValley, count, start, possibleValley, end);
 			    }
 			} 
 		    }
 		    if (end > 0) {
 			start = end + 1;
-			valley = 0;
+			possibleValley = 0;
 			end = 0;
 		    } else {
 			start++;
@@ -119,9 +119,9 @@ public class ValleyGenerator {
 				// we found a possible valley... 
 				foundValley = testedSampleIndex;
 				testedSampleIndex++;
-			} else if (goingDown(sampleList, start, testedSampleIndex)) {
+			} else  if (goingDown(sampleList, start, testedSampleIndex)) {
 				testedSampleIndex++;
-				continue;
+				//continue;
 			} else {
 				// Not going down in this step.
 				// Start all over from the next possible start
@@ -139,10 +139,10 @@ public class ValleyGenerator {
     	int       tputS    = sampleS.getThroughput();
     	int       tputV    = sampleV.getThroughput();
 
-    	Float diff = 0.0F;
+    	double diff = 0.0F;
     	
     	if (tputS > 0.0F) {
-    	    diff = ((tputS - tputV)/tputS) * 100.0F;
+    	    diff = (((double) tputS - (double) tputV)/tputS);
     	    if (tputS > tputV && diff >  delta ) {
     		response = true;
     	    }

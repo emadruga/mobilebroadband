@@ -37,9 +37,9 @@ public class Sample {
 	 */
 	public String getOperatorName() {
 		String timName="TIM",
-				claroName="Claro",
-				vivoName="Vivo",
-				oiName="Oi";		
+				claroName="CLARO",
+				vivoName="VIVO",
+				oiName="OI";		
 		
 		String name = null;
 		switch (this.mnc) {

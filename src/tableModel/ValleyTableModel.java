@@ -8,13 +8,21 @@ import javax.swing.table.DefaultTableModel;
 
 import dataModel.Valley;
 
-
+	
 
 public class ValleyTableModel extends DefaultTableModel implements IFaceTableModel{
 	
+	public Vector<Vector<Object>> data = new Vector<Vector<Object>>();
+	public Vector<Object> names = new Vector<Object>();
+	
+	
 	public ValleyTableModel(Vector<Valley> valleys) {
 		super();
-		setDataVector(organizeData(valleys), organizeColumnNames());
+		names=organizeColumnNames();
+		data=organizeData(valleys);
+		
+		setDataVector(data, names);
+		printOut();
 	}
 	
 
@@ -85,6 +93,19 @@ public class ValleyTableModel extends DefaultTableModel implements IFaceTableMod
 			
 		}	
 		return finalVector;
+	}
+	
+	public void printOut() {
+		for (int i = 0; i < names.size(); i++) {
+			System.out.print(names.get(i)+"  ");
+		}
+		System.out.println();
+		for (int i = 0; i < data.size(); i++) {
+			for (int j = 0; j < data.get(i).size(); j++) {
+				System.out.print(data.get(i).get(j)+"  ");
+			}
+			System.out.println();
+		}
 	}
 	
 }

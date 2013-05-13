@@ -9,19 +9,19 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import tableModel.CdfTableModel;
-import tableModel.SummaryTableModel;
-import tableModel.ValleyTableModel;
 import misc.MysqlConnection;
 import misc.QueryConstructor;
 import misc.Report;
+import tableModel.CdfTableModel;
+import tableModel.SummaryTableModel;
+import tableModel.ValleyTableModel;
 import dataModel.CdfOrganizer;
 import dataModel.CdfWhithTput;
 import dataModel.Sample;
 import dataModel.SampleGenerator;
 import dataModel.SummaryOrganizer;
 import dataModel.Valley;
-import dataModel.ValleyGenerator;
+import dataModel.ValleyGenerator2;
 
 public class Core {
 	
@@ -82,7 +82,7 @@ public class Core {
 		Vector<Sample> vectorOfSamples = SampleGenerator.findSamples(operatorsSelected, campaignsList);
 
 		// calculating valleys
-		Vector<Valley> vectorOfValley = ValleyGenerator.findValleysOnSamples(
+		Vector<Valley> vectorOfValley = ValleyGenerator2.findValleysOnSamples(
 				vectorOfSamples, lenght, Delta1, Delta2);
 
 		if (vectorOfValley != null) {
@@ -107,19 +107,19 @@ public class Core {
 				.findSamples(operatorsSelected, campaignsList);
 
 		// calculating valleys
-		Vector<Valley> vectorOfValley = ValleyGenerator.findValleysOnSamples(
+		Vector<Valley> vectorOfValley = ValleyGenerator2.findValleysOnSamples(
 				vectorOfSamples, lenght, Delta1, Delta2);
 
 		if (vectorOfValley != null) {
 			// populating a table model
 			SummaryOrganizer claroSummaryData = new SummaryOrganizer(
-					vectorOfValley, "Claro");
+					vectorOfValley, "CLARO");
 			SummaryOrganizer vivoSummaryData = new SummaryOrganizer(
-					vectorOfValley, "Vivo");
+					vectorOfValley, "VIVO");
 			SummaryOrganizer timSummaryData = new SummaryOrganizer(
 					vectorOfValley, "TIM");
 			SummaryOrganizer oiSummaryData = new SummaryOrganizer(
-					vectorOfValley, "Oi");
+					vectorOfValley, "OI");
 
 			SummaryTableModel summaryTableModel = new SummaryTableModel();
 
@@ -159,19 +159,19 @@ public class Core {
 				break;
 				
 			case 5: 
-				CdfOrganizer claroData = new CdfOrganizer(vectorOfSamples, parameter, "Claro");
+				CdfOrganizer claroData = new CdfOrganizer(vectorOfSamples, parameter, "CLARO");
 				claroData.init();
 				tableModel.add(claroData);
 				break;
 				
 			case 11: 
-				CdfOrganizer vivoData = new CdfOrganizer(vectorOfSamples, parameter, "Vivo");
+				CdfOrganizer vivoData = new CdfOrganizer(vectorOfSamples, parameter, "VIVO");
 				vivoData.init();
 				tableModel.add(vivoData);
 				break;
 				
 			case 31: 
-				CdfOrganizer oiData = new CdfOrganizer(vectorOfSamples, parameter, "Oi");
+				CdfOrganizer oiData = new CdfOrganizer(vectorOfSamples, parameter, "OI");
 				oiData.init();
 				tableModel.add(oiData);
 				break;
@@ -209,7 +209,7 @@ public class Core {
 				break;
 				
 			case 5: 
-				CdfWhithTput claroData = new CdfWhithTput(vectorOfSamples, parameter, "Claro", tput);
+				CdfWhithTput claroData = new CdfWhithTput(vectorOfSamples, parameter, "CLARO", tput);
 				claroData.init();
 				tableModel.add(claroData);
 				break;
