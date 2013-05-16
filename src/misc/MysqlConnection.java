@@ -1,17 +1,18 @@
 package misc;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MysqlConnection {
-    
-    private Connection conexao = null;
-	private String servidor = "";
-	private String banco = "";
-	private String usuario = "";
-	private String senha = "";
-	public static String table="";
-	private boolean estaConectado = false;
+
+	private Connection		conexao				= null;
+	private String				servidor			= "";
+	private String				banco					= "";
+	private String				usuario				= "";
+	private String				senha					= "";
+	public static String	table					= "";
+	private boolean				estaConectado	= false;
 
 	public Connection getConexao() {
 		return this.conexao;
@@ -20,7 +21,7 @@ public class MysqlConnection {
 	public boolean getStatus() {
 		return this.estaConectado;
 	}
-	
+
 	public void conectar() {
 
 		try {
@@ -37,9 +38,7 @@ public class MysqlConnection {
 		}
 
 		try {
-			this.conexao = DriverManager.getConnection("jdbc:mysql://"
-					+ this.servidor + "/" + this.banco + "?user="
-					+ this.usuario + "&password=" + this.senha);
+			this.conexao = DriverManager.getConnection("jdbc:mysql://" + this.servidor + "/" + this.banco + "?user=" + this.usuario + "&password=" + this.senha);
 		} catch (SQLException e) {
 			// TODO tratar os tipos diferentes de erro SQL
 			System.out.println("--erro de SQL--");
@@ -62,40 +61,13 @@ public class MysqlConnection {
 		}
 	}
 
-	public MysqlConnection(String pathToXml){
+	public MysqlConnection(String pathToXml) {
 		DbPropertiesSelector properties = new DbPropertiesSelector(pathToXml);
 		this.servidor = properties.getServer();
 		this.banco = properties.getDatabase();
 		this.usuario = properties.getUser();
 		this.senha = properties.getPassword();
-		this.table = properties.getTable();
+		table = properties.getTable();
 	}
 
-
-    
-    
-    
-    
-    
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }

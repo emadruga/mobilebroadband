@@ -6,15 +6,12 @@ import javax.swing.table.DefaultTableModel;
 
 import dataModel.SummaryOrganizer;
 
-public class SummaryTableModel extends DefaultTableModel implements
-		IFaceTableModel {
+public class SummaryTableModel extends DefaultTableModel implements IFaceTableModel {
 
-	private Vector<Vector<Object>> data = new Vector<Vector<Object>>();
-	private Vector<Object> columnNames = new Vector<Object>();
-
-	Object columnNamesBase[] = new Object[] { "all", "cqi", "ecio", "rscp",
-			"cqiAecio", "cqiArscp", "ecioArscp", "nothing", "moreThenOne",
-			"operatorName" };
+	private Vector<Vector<Object>>	data							= new Vector<Vector<Object>>();
+	private Vector<Object>					columnNames				= new Vector<Object>();
+	Object													columnNamesBase[]	= new Object[] { "operatorName", "totalValleys", "all", "cqi", "ecio", "rscp", "none", "combOfTwo", "pall", "pcqi", "pecio",
+			"prscp", "pnone", "pcombOfTwo", "startDate", "endDate" };
 
 	public void organizeColumnNames() {
 		this.columnNames = new Vector<Object>();
@@ -33,7 +30,7 @@ public class SummaryTableModel extends DefaultTableModel implements
 		}
 		organizeColumnNames();
 		setDataVector(data, columnNames);
-		//printout();
+		printOut();
 	}
 
 	private void printOut() {

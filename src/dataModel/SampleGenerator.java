@@ -1,4 +1,5 @@
 package dataModel;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,18 +10,17 @@ import misc.QueryConstructor;
 
 public class SampleGenerator {
 
-	private static String queryNameUsed = "query4";
-	private static String dbParametersFile = "config/dbProperties.xml";
-
+	private static String	queryNameUsed			= "query4";
+	private static String	dbParametersFile	= "config/dbProperties.xml";
 
 	/**
-	 * Populates <code>Sample</code>'s data 
+	 * Populates <code>Sample</code>'s data
+	 * 
 	 * @param resultSet
 	 * @return
 	 * @throws SQLException
 	 */
-	private static Sample generateSample(ResultSet resultSet)
-			throws SQLException {
+	private static Sample generateSample(ResultSet resultSet) throws SQLException {
 
 		Sample oneSample = new Sample();
 		oneSample.setMsgId(resultSet.getInt("ftp_msgid"));
@@ -41,7 +41,7 @@ public class SampleGenerator {
 		return oneSample;
 	}
 
-	public static Vector<Sample> findSamples(Vector<Integer> operators, Vector<String> campaingsList){
+	public static Vector<Sample> findSamples(Vector<Integer> operators, Vector<String> campaingsList) {
 
 		// Variables Declaration
 		Vector<Sample> vectorOfSamples = new Vector<Sample>();
@@ -63,8 +63,7 @@ public class SampleGenerator {
 		} finally {
 			connection.desconectar();
 		}
-		System.out.println("Sample Generator -- Total of Samples: "
-				+ vectorOfSamples.size());
+		System.out.println("Sample Generator -- Total of Samples: " + vectorOfSamples.size());
 		return vectorOfSamples;
 	}
 

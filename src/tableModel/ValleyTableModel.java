@@ -44,7 +44,11 @@ public class ValleyTableModel extends DefaultTableModel implements IFaceTableMod
 			
 			"cqiProb",
 			"rscpProb",
-			"ecioProb"
+			"ecioProb",
+			
+			"operator",
+			"movement",
+			"scChange"
 			};
 	
 	
@@ -86,6 +90,10 @@ public class ValleyTableModel extends DefaultTableModel implements IFaceTableMod
 				vector.add(valleys.get(i).testForCqiProblem());
 				vector.add(valleys.get(i).testForRscpProblem());
 				vector.add(valleys.get(i).testForEcioProblem());
+				
+				vector.add(valleys.get(i).getFirstSample().getOperatorName());
+				vector.add(valleys.get(i).testForMovement());
+				vector.add(valleys.get(i).testForScChange());
 				finalVector.add(vector);
 			
 			}

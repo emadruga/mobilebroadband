@@ -9,67 +9,60 @@ import java.sql.Timestamp;
 public class Sample {
 
 	// Session / Data packet parameters
-	private int ftp_msgId = 0;
-	private int sessionid = 0;
-	private Timestamp msgTime = null;
+	private int				ftp_msgId		= 0;
+	private int				sessionid		= 0;
+	private Timestamp	msgTime			= null;
 
 	// Position Parameters
-	private int latitude = 0;
-	private int longitude = 0;
-	private int throughput = 0;
-	private int speed = 0;
+	private int				latitude		= 0;
+	private int				longitude		= 0;
+	private int				throughput	= 0;
+	private int				speed				= 0;
 
 	// Link Parameters
-	private int sc1 = 0;
-	private int sc2 = 0;
-	private int sc3 = 0;
-	private int primScCode = 0;
-	private int mnc = 0;
+	private int				sc1					= 0;
+	private int				sc2					= 0;
+	private int				sc3					= 0;
+	private int				primScCode	= 0;
+	private int				mnc					= 0;
 
 	// RF parameters
-	private double ecio = 0;
-	private double cqi = 0;
-	private double rscp = 0;
+	private double		ecio				= 0;
+	private double		cqi					= 0;
+	private double		rscp				= 0;
 
-	
 	/*
 	 * Methods:
 	 */
 	public String getOperatorName() {
-		String timName="TIM",
-				claroName="CLARO",
-				vivoName="VIVO",
-				oiName="OI";		
-		
+		String timName = "TIM", claroName = "CLARO", vivoName = "VIVO", oiName = "OI";
+
 		String name = null;
 		switch (this.mnc) {
-		case 2:
-			name = timName;
-			break;
-		case 5:
-			name = claroName;
-			break;
-		case 11:
-			name = vivoName;
-			break;
-		case 31:
-			name = oiName;
-			break;
-		default:
-			System.out.println("There's no MNC that matches. Verify Sample.getOperatorName");
-			System.exit(0);
-			break;
+			case 2:
+				name = timName;
+				break;
+			case 5:
+				name = claroName;
+				break;
+			case 11:
+				name = vivoName;
+				break;
+			case 31:
+				name = oiName;
+				break;
+			default:
+				System.out.println("There's no MNC that matches. Verify Sample.getOperatorName");
+				System.exit(0);
+				break;
 		}
 		return name;
 	}
-	
-	
-	
-	
+
 	/*
 	 * Getters and Setters
 	 */
-	
+
 	public int getMsgId() {
 		return ftp_msgId;
 	}

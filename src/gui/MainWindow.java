@@ -23,6 +23,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 
 import control.Core;
@@ -47,6 +48,15 @@ public class MainWindow extends JFrame {
 
 	//private TableModel model = new DefaultTableModel();
 	private JPanel panel_2;
+	private JTextField txtCqimax;
+	private JTextField txtCqimin;
+	private JTextField txtCqiinterval;
+	private JTextField txtInterval;
+	private JTextField txtRscpmin;
+	private JTextField txtRscpmax;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
 
 	private boolean testIfAtLeastOneCampaignWasSelected() {
 		if (campaignsList.size() > 0)
@@ -308,6 +318,127 @@ public class MainWindow extends JFrame {
 
 		JPanel panel = new JPanel();
 		tabbedPane.addTab("New tab", null, panel, null);
+		panel.setLayout(null);
+		
+		JLabel lblMaxSamples = new JLabel("Max Samples:");
+		lblMaxSamples.setBounds(45, 71, 72, 16);
+		panel.add(lblMaxSamples);
+		
+		JLabel lblDelta = new JLabel("Delta 1:");
+		lblDelta.setBounds(45, 93, 61, 16);
+		panel.add(lblDelta);
+		
+		JLabel lblDelta_1 = new JLabel("Delta 2:");
+		lblDelta_1.setBounds(55, 136, 61, 16);
+		panel.add(lblDelta_1);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(33, 193, 112, 93);
+		panel.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblCqimax = new JLabel("Max:");
+		lblCqimax.setBounds(6, 11, 37, 16);
+		panel_3.add(lblCqimax);
+		
+		JLabel lblCqiinterval = new JLabel("Interval:");
+		lblCqiinterval.setBounds(6, 68, 61, 16);
+		panel_3.add(lblCqiinterval);
+		
+		txtCqiinterval = new JTextField();
+		txtCqiinterval.setBounds(60, 62, 48, 28);
+		panel_3.add(txtCqiinterval);
+		txtCqiinterval.setColumns(10);
+		
+		JLabel lblCqimin = new JLabel("Min:");
+		lblCqimin.setBounds(6, 38, 61, 16);
+		panel_3.add(lblCqimin);
+		
+		txtCqimin = new JTextField();
+		txtCqimin.setBounds(60, 32, 48, 28);
+		panel_3.add(txtCqimin);
+		txtCqimin.setColumns(10);
+		
+		txtCqimax = new JTextField();
+		txtCqimax.setBounds(60, 2, 48, 28);
+		panel_3.add(txtCqimax);
+		txtCqimax.setColumns(10);
+		
+		JLabel lblCqi = new JLabel("CQI");
+		lblCqi.setBounds(23, 174, 61, 16);
+		panel.add(lblCqi);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setLayout(null);
+		panel_4.setBounds(252, 193, 112, 93);
+		panel.add(panel_4);
+		
+		JLabel lblRscpmax = new JLabel("Max:");
+		lblRscpmax.setBounds(6, 11, 37, 16);
+		panel_4.add(lblRscpmax);
+		
+		JLabel label_1 = new JLabel("Interval:");
+		label_1.setBounds(6, 68, 61, 16);
+		panel_4.add(label_1);
+		
+		txtInterval = new JTextField();
+		txtInterval.setColumns(10);
+		txtInterval.setBounds(60, 62, 48, 28);
+		panel_4.add(txtInterval);
+		
+		JLabel label_2 = new JLabel("Min:");
+		label_2.setBounds(6, 38, 61, 16);
+		panel_4.add(label_2);
+		
+		txtRscpmin = new JTextField();
+		txtRscpmin.setColumns(10);
+		txtRscpmin.setBounds(60, 32, 48, 28);
+		panel_4.add(txtRscpmin);
+		
+		txtRscpmax = new JTextField();
+		txtRscpmax.setColumns(10);
+		txtRscpmax.setBounds(60, 2, 48, 28);
+		panel_4.add(txtRscpmax);
+		
+		JLabel lblRscp = new JLabel("RSCP");
+		lblRscp.setBounds(242, 174, 61, 16);
+		panel.add(lblRscp);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setLayout(null);
+		panel_5.setBounds(421, 193, 112, 93);
+		panel.add(panel_5);
+		
+		JLabel label = new JLabel("Max:");
+		label.setBounds(6, 11, 37, 16);
+		panel_5.add(label);
+		
+		JLabel label_3 = new JLabel("Interval:");
+		label_3.setBounds(6, 68, 61, 16);
+		panel_5.add(label_3);
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		textField.setBounds(60, 62, 48, 28);
+		panel_5.add(textField);
+		
+		JLabel label_4 = new JLabel("Min:");
+		label_4.setBounds(6, 38, 61, 16);
+		panel_5.add(label_4);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(60, 32, 48, 28);
+		panel_5.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(60, 2, 48, 28);
+		panel_5.add(textField_2);
+		
+		JLabel label_5 = new JLabel("RSCP");
+		label_5.setBounds(411, 174, 61, 16);
+		panel.add(label_5);
 		btnd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				updateCampaignsList();

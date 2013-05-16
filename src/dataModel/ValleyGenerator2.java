@@ -5,24 +5,23 @@ import java.util.Vector;
 
 public class ValleyGenerator2 {
 
-	private final static Integer	MAX_TIME_SECS	= 20; 		//maximum valley's size in seconds
-	private final static double		MIN_TPUT_START	= 300;  //minimum throughput value for first sample
+	private final static Integer	MAX_TIME_SECS		= 20;	// maximum valley's size in seconds
+	private final static double		MIN_TPUT_START	= 300;	// minimum throughput value for first sample
 
 	public static Vector<Valley> findValleysOnSamples(Vector<Sample> sList, int lenght, double d1, double d2) {
 
-		int startTsd = 0; 					   // startTsd: It's a pointer to the first sample of the possible valley
-		int valleyTsd = startTsd;    	 // valleyTsd: It's a pointer to "valley" sample of the possible valley 
-		int endTsd = valleyTsd; 		   // endTsd: It's a pointer to the last sample of the possible valley 
-		int startMAX = sList.size()-2; // startMAX: It's the last sample that could be called "startTst"
-		Vector<Valley> vValley=				 // final vector to be returned by this function/procedure
-				new Vector<Valley>();
-		int count = 0;								 // number of valleys found in samples 
+		int startTsd = 0; // startTsd: It's a pointer to the first sample of the possible valley
+		int valleyTsd = startTsd; // valleyTsd: It's a pointer to "valley" sample of the possible valley
+		int endTsd = valleyTsd; // endTsd: It's a pointer to the last sample of the possible valley
+		int startMAX = sList.size() - 2; // startMAX: It's the last sample that could be called "startTst"
+		Vector<Valley> vValley = // final vector to be returned by this function/procedure
+		new Vector<Valley>();
+		int count = 0; // number of valleys found in samples
 
-		
-		//This loop moves startTsd from 0 to the antepenult sample. There is no need go beyond that point.
+		// This loop moves startTsd from 0 to the antepenult sample. There is no need go beyond that point.
 		while (startTsd <= startMAX) {
 
-			//This condition stops the cycle when valleyTsd reaches the penultimate sample.
+			// This condition stops the cycle when valleyTsd reaches the penultimate sample.
 			if (valleyTsd == startMAX - 1) {
 				break;
 			}
@@ -30,38 +29,28 @@ public class ValleyGenerator2 {
 			valleyTsd++;
 
 			/*
-			 * This "if" tests if the startTst and valleyTsd come from
-			 * the same session and if startTsd is bigger then MIN_TPUT_START
+			 * This "if" tests if the startTst and valleyTsd come from the same session and if startTsd is bigger then MIN_TPUT_START
 			 */
 			if ((isTheSameSession(sList, startTsd, valleyTsd)) && (isStartTstdBiggerThenValleyTstd(sList, startTsd, valleyTsd))) {
 
 				/*
-				 * This "if" tests interesting down condition. Case yes, a new loop looks for a sample to finish the valley.
-				 * The amount of samples can't be bigger then "length" parameter
+				 * This "if" tests interesting down condition. Case yes, a new loop looks for a sample to finish the valley. The amount of samples can't be bigger then "length" parameter
 				 */
 				if (isInterestingDescent(sList, startTsd, valleyTsd, MIN_TPUT_START, d1)) {
 					endTsd = valleyTsd + 1;
 					while (isSmallerThenMaxLenght(sList, startTsd, endTsd, lenght)) {
 
-						
-						//Testando aqui
+						// Testando aqui
 						double vallasd = sList.get(valleyTsd).getThroughput();
 						double endasd = sList.get(endTsd).getThroughput();
-						if (vallasd>endasd) {
-							valleyTsd=endTsd;
+						if (vallasd > endasd) {
+							valleyTsd = endTsd;
 							endTsd++;
-							//break;
+							// break;
 						}
-						
-						
-						
+
 						if (isTheSameSession(sList, valleyTsd, endTsd)) {
-							
-							
-						
-							
-							
-							
+
 							if (isInterestingRising(sList, valleyTsd, endTsd, d2)) {
 
 								/*
@@ -99,14 +88,13 @@ public class ValleyGenerator2 {
 
 					}
 
-				} else 
+				} else
 					if (!isSmallerThenMaxLenght(sList, startTsd, valleyTsd, lenght))
 						startTsd = valleyTsd;
-				
 
 			} else
-				/* if the samples aren't from the same session or startTsd is smaller then minimum,
-				 * the next test will starts with startTestd in a new position
+				/*
+				 * if the samples aren't from the same session or startTsd is smaller then minimum, the next test will starts with startTestd in a new position
 				 */
 				startTsd = valleyTsd;
 
