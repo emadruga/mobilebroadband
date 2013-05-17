@@ -39,8 +39,7 @@ public class ValleyGenerator2 {
 				if (isInterestingDescent(sList, startTsd, valleyTsd, MIN_TPUT_START, d1)) {
 					endTsd = valleyTsd + 1;
 					while (isSmallerThenMaxLenght(sList, startTsd, endTsd, lenght)) {
-
-						// Testando aqui
+						//Testando aqui
 						double vallasd = sList.get(valleyTsd).getThroughput();
 						double endasd = sList.get(endTsd).getThroughput();
 						if (vallasd > endasd) {
@@ -48,9 +47,8 @@ public class ValleyGenerator2 {
 							endTsd++;
 							// break;
 						}
-
 						if (isTheSameSession(sList, valleyTsd, endTsd)) {
-
+							
 							if (isInterestingRising(sList, valleyTsd, endTsd, d2)) {
 
 								/*
