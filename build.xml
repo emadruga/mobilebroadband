@@ -9,12 +9,12 @@
 	<!-- *** environment settings *** -->
 	
 	<!-- *** mysql connector (.jar) dir *** -->
-	<property name="mysqlLib.dir" value="/Users/rdantas/Dropbox/Eclipse"/>
-	<!--property name="mysqlLib.dir" value="C:\Users\Ewerton\Downloads\mysql-connector-java-5.1.24"/ -->
+	<!-- property name="mysqlLib.dir" value="/Users/rdantas/Dropbox/Eclipse"/-->
+	<property name="mysqlLib.dir" value="C:\Users\Ewerton\Downloads\mysql-connector-java-5.1.24"/>
 	
 	<!-- *** Pentaho Reporting Design libs *** -->
-	<property name="pentahoLib.dir" value="/Users/rdantas/Dropbox/Eclipse/pentaho-libs"/>
-	<!-- property name="pentahoLib.dir" value="C:\Users\Ewerton\Downloads\report-designer\lib"/-->
+	<!-- property name="pentahoLib.dir" value="/Users/rdantas/Dropbox/Eclipse/pentaho-libs"/-->
+	<property name="pentahoLib.dir" value="C:\Users\Ewerton\Downloads\report-designer\lib"/>
 	
 	<path id="classpath">
 		<fileset dir="${mysqlLib.dir}" includes="**/*.jar"/>
@@ -38,7 +38,10 @@
 	</target>
 
 	<target name="run" depends="compile">
-		<java fork="true" classpathref="runtime_classpath" classname="${main-class}"/>
+		<java fork="true" classpathref="runtime_classpath" classname="${main-class}">
+		    <!--jvmarg value="-Xdebug" />
+		    <jvmarg value="-Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5432" /-->
+		</java>
 	</target>
 
 	<target name="main" depends="run"/>
