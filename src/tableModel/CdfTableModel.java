@@ -36,7 +36,7 @@ public class CdfTableModel extends DefaultTableModel implements IFaceTableModel 
 			vector.add(cdfData.countSamples);
 
 			if (cdfData.tput != null)
-				vector.add("Throughput Analysed: " + cdfData.tput + " KBps");
+				vector.add("Tput: " + cdfData.tput + " Kbps");
 
 			this.data.add(vector);
 		}
