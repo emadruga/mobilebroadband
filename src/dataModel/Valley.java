@@ -57,7 +57,7 @@ public class Valley {
 
 		boolean rsp = false;
 		for (Sample sample : this.getAllSamples()) {
-			if (sample.getCqi() < 12)
+			if (sample.getCqi() < 15)
 				rsp = true;
 		}
 
@@ -92,7 +92,7 @@ public class Valley {
 		boolean rsp = false;
 
 		for (Sample sample : this.getAllSamples()) {
-			if (sample.getEcio() < -11)
+			if (sample.getEcio() < -12)
 				rsp = true;
 		}
 
