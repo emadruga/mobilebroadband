@@ -50,7 +50,10 @@ public class CdfWhithTput extends CdfOrganizer {
 			for (int j = 0; j < vParameter.size(); j++) {
 				double parameter = vParameter.get(j);
 				int throughput = vThroughputs.get(j);
-				if ((parameter >= intervals.get(i)) && (parameter < intervals.get(i) + classInterval) && (throughput >= this.tput)) {
+				int floor = (int) (this.tput * 0.90);
+				int ceil = (int) (this.tput * 1.10);
+			    boolean isGoodTput = (throughput > floor) && (throughput <= ceil);
+				if ((parameter >= intervals.get(i)) && (parameter < intervals.get(i) + classInterval) && (isGoodTput)) {
 					count++;
 					countSamples++;
 				}
